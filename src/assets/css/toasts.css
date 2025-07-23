@@ -1,0 +1,9 @@
+.toast {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.toast-body {
+  font-weight: 500;
+}
