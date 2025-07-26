@@ -8,7 +8,7 @@
 
 ---
 
-## 🗓️ Version 1.0.0 — Opening Scene *(July 2025)*
+## [0.1.6] — 2025-07-23
 
 ### 🔧 Core Refactor
 - Separated framework logic from the Postman 4 template
@@ -51,3 +51,26 @@
 - Develop additional helpers: `useCopy()`, `useFont()`, `useSEO()`
 
 ---
+
+## [0.1.7] - 2025.07.26
+
+### Added
+- Core `Dispatcher` for operations: `.dispatch()`, `.subscribe()`, `.get()`, `.set()`, `.fetch()`
+- Foundational scene lifecycle structure with initial support for `onMount()`
+- Delegated scene mounting via `SceneEngine.js` (`SceneManager.mountScene()`)
+- Declarative template rendering mechanism via `renderTemplate.js`
+
+### Changed
+- `PanelManager` → `SceneManager`: now the main orchestrator of scene lifecycle
+- Scene registration logic moved from `SceneManager.js` → `SceneRegistry.js`
+- `LayoutRegistry.js` → `LayoutRegistryScheme.js` for structured layout schemas
+- `ComponentRegistry.js` → `LayoutRegistryComponents.js` for tracking UI components
+
+### Notes
+- `SceneManager` listens for the `"go"` command from the scene via `onMount()` before triggering the Dispatcher
+- HTML rendering within scenes is now initialized through the `template()` call, enabling declarative scene structure  
+  The previous scene definition approach using  
+  `mount(params = {}) { container.innerHTML = `\`...\` `}`  
+  remains available as an alternative way to build scenes
+
+  ---
