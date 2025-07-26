@@ -5,7 +5,7 @@ export const ExamplesList = {
         const container = document.getElementById("examples-list");
 
         if (!container) {
-            console.warn("[ExamplesList] Контейнер #examples-list не знайдено — компонент не змонтовано.");
+            console.warn("[ExamplesList] Container #examples-list not found - component not mounted.");
             return;
         }
 

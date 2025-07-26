@@ -6,14 +6,14 @@ import { init } from "./router";
 // import { layout } from "./components/layout/MainLayout.js";
 
 // Theme control
-import { PanelManager } from "./core/tce/PanelManager.js";
+import { SceneManager } from "./core/tce/SceneManager.js";
 
 class MainController {
     constructor(rootId) {
         this.root = document.getElementById(rootId);
         this.localStorage = new LocalStorage();
         this.routing = new Routing();
-        this.panelManager = new PanelManager();
+        this.panelManager = new SceneManager();
     }
 
     renderLayout() {

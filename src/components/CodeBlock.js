@@ -5,7 +5,7 @@ export const CodeBlock = {
         const container = document.getElementById("code-block");
 
         if (!container) {
-            console.warn("[CodeBlock] Контейнер #create-scene не знайдено — компонент не змонтовано.");
+            console.warn("[CodeBlock] Container #code-block not found - component not mounted.");
             return;
         }
 

@@ -1,4 +1,4 @@
-export const LayoutRegistry = {
+export const LayoutRegistryScheme = {
     page_404: {
         primary_structure: ``,
         layout: ["Page404"],
@@ -12,7 +12,7 @@ export const LayoutRegistry = {
                   <section id="welcome-block"></section>
                 </main>
             `,
-        layout: ["WelcomeView", "QuickDocs", "CodeBlock", "ExamplesList", "Footer"],
+        layout: ["WelcomeView", "QuickDocs", "CodeBlock", "ExamplesList", "AddEntry", "Footer"],
         config: {
             WelcomeView: {
                 title: "Horizon Dynamic UI",

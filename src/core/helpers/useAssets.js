@@ -1,7 +1,7 @@
-import {LayoutRegistry} from "../tce/RegistryLayoutScheme.js";
+import { LayoutRegistryScheme } from "../tce/RegistryLayoutScheme.js";
 
 export function useAssets(sceneName) {
-    const scene = LayoutRegistry[sceneName];
+    const scene = LayoutRegistryScheme[sceneName];
     if (!scene || !scene.scriptSrc) return;
 
     // Scripts

@@ -3,7 +3,7 @@ export const TopBar = {
         const container = document.getElementById("navbarBlur");
 
         if (!container) {
-            console.warn("[TopBar] Контейнер #navbarBlur не знайдено — компонент не змонтовано.");
+            console.warn("[TopBar] Container #navbarBlur not found - component not mounted.");
             return;
         }
 
