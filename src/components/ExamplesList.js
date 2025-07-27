@@ -94,6 +94,5 @@ export const ExamplesList = {
                 </div>
               </div>
         `;
-
     }
 }

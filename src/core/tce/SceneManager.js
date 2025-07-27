@@ -1,12 +1,32 @@
 import {SceneDispatcher} from "../dispatcher/SceneDispatcher.js";
+import {dispatcher} from "../helpers/useDispatcher.js";
 import {LayoutRegistryScheme} from "./RegistryLayoutScheme.js";
 import {LayoutRegistryComponents} from './LayoutRegistryComponents.js';
 
 // Helpers
 import {useAssets} from "../helpers/useAssets.js";
 
+// Scenes
+import {WelcomeScene} from "../../pages/WelcomeScene.js";
+import {DebugCatch} from "../debug/DebugCatch.js";
+import {DebugView} from "../debug/DebugView.js";
+
+// WelcomeScene.mount();
+// WelcomeScene.onMount();
+
 export class SceneManager {
     constructor() {
+        DebugCatch.init();
+
+        setTimeout(() => {
+            if (DebugCatch.debugLogs?.error?.length > 0 ||
+                DebugCatch.debugLogs?.warn?.length > 0 ||
+                DebugCatch.debugLogs?.info?.length > 0 ||
+                DebugCatch.debugLogs?.log?.length > 0) {
+                DebugView();
+            }
+        }, 500);
+
         SceneDispatcher.subscribe("go", sceneName => {
             const scene = LayoutRegistryScheme[sceneName];
             if (scene) {
@@ -15,6 +35,11 @@ export class SceneManager {
                 console.warn("Scene not found", sceneName);
             }
         })
+
+        dispatcher.subscribe("theme", theme => {
+            document.body.setAttribute("data-theme", theme);
+        });
+
     };
 
     mountScene(sceneName, targetId = "app") {
@@ -27,7 +52,18 @@ export class SceneManager {
         this.triggerLifecycle(scene, "onDestroy");
         this.activeScene = scene;
 
-        root.innerHTML = scene.primary_structure || "";
+        try {
+            root.innerHTML = scene.primary_structure || "";
+        } catch (e) {
+            console.warn(`⚠️ Scene ${phaseName} error: `, e);
+
+            ErrorConsole.renderFatal({
+                message: e.message || "Помилка без повідомлення",
+                hint: `Помилка в фазі ${phaseName}`,
+                code: e.stack || "No stack trace"
+            });
+        }
+
 
         requestAnimationFrame(() => {
             scene.layout?.forEach(sceneName => {
@@ -51,7 +87,6 @@ export class SceneManager {
             }
         }
     }
-
 
     mountComponent(name, config) {
         const component = LayoutRegistryComponents.ComponentMap[name];

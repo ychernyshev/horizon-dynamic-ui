@@ -1,5 +1,5 @@
 export const Page_404_View = {
-    mount(params = {}) {
+    mount(config = {}) {
         const container = document.getElementById("app");
 
         if (!container) {

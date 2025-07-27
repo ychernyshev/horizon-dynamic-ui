@@ -1,23 +1,23 @@
 import { LocalStorage } from "./core/helpers/useLocalStorage.js";
 import { Routing } from "./core/helpers/useRouting.js";
 import { init } from "./router";
+import { SceneManager } from "./core/tce/SceneManager.js";
+import {Dispatcher} from "./core/helpers/useDispatcher.js";
 
 //  Interface Layout
 // import { layout } from "./components/layout/MainLayout.js";
-
-// Theme control
-import { SceneManager } from "./core/tce/SceneManager.js";
 
 class MainController {
     constructor(rootId) {
         this.root = document.getElementById(rootId);
         this.localStorage = new LocalStorage();
         this.routing = new Routing();
-        this.panelManager = new SceneManager();
+        this.sceneManager = new SceneManager();
+        this.dispatcher = new Dispatcher();
     }
 
     renderLayout() {
-        this.panelManager.mountScene();
+        this.sceneManager.mountScene();
     }
 
     navigateTo(view) {

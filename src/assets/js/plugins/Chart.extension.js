@@ -10,7 +10,7 @@ Chart.elements.Rectangle.prototype.draw = function() {
   var left, right, top, bottom, signX, signY, borderSkipped, radius;
   var borderWidth = vm.borderWidth;
   // Set Radius Here
-  // If radius is large enough to cause drawing errors a max radius is imposed
+  // If radius is large enough to cause drawing debug a max radius is imposed
   var cornerRadius = 6;
 
   if (!vm.horizontal) {
