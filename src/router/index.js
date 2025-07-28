@@ -15,7 +15,7 @@ export function init(app) {
 
     app.routing.init();
     app.localStorage.init();
-    app.dispatcher.init();
+    // app.dispatcher.init();
     // const defaultTheme = localStorage.getItem("theme") || "light";
     // app.dispatcher.set("theme", defaultTheme);
     // app.sceneManager.init();

@@ -74,3 +74,15 @@
   remains available as an alternative way to build scenes
 
   ---
+
+## [0.1.9] - 2025-07-28
+
+### ✨ Dispatcher Updates
+- Added support for `clear`, `unsubscribe`, and `hydrate` listeners
+- Enhanced flexibility and control across components
+
+### 📝 Notes Module
+- Implemented entry creation and rendering from `localStorage`
+- UI dynamically reflects stored data without manual reload
+
+  ---

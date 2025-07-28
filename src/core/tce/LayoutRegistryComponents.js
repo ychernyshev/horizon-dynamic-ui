@@ -7,6 +7,7 @@ import { QuickDocs } from "../../pages/docs/QuickDocs.js";
 import { CodeBlock } from "../../components/CodeBlock.js";
 import { ExamplesList } from "../../components/ExamplesList.js";
 import { AddEntry } from "../../components/AddEntry.js";
+import { ShowEntry } from "../../components/ShowEntry.js";
 import { Footer } from "../../components/Footer.js";
 
 export class LayoutRegistryComponents {
@@ -20,6 +21,7 @@ export class LayoutRegistryComponents {
         CodeBlock,
         ExamplesList,
         AddEntry,
+        ShowEntry,
         Footer,
     });
 }

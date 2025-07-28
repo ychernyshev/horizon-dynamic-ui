@@ -12,7 +12,7 @@ export const LayoutRegistryScheme = {
                   <section id="welcome-block"></section>
                 </main>
             `,
-        layout: ["WelcomeView", "QuickDocs", "CodeBlock", "ExamplesList", "AddEntry", "Footer"],
+        layout: ["WelcomeView", "QuickDocs", "CodeBlock", "ExamplesList", "AddEntry", "ShowEntry", "Footer"],
         config: {
             WelcomeView: {
                 title: "Horizon Dynamic UI",

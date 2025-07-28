@@ -41,7 +41,12 @@ export const WelcomeScene = {
                         </div>
                     </div>
                     <div class="row mt-5 mb-5">
-                        <section id="add-entry"></section>
+                        <div class="col-xl-6">
+                            <section id="add-entry"></section>
+                        </div>
+                        <div class="col-xl-6">
+                            <section id="show-entry"></section>
+                        </div>
                     </div>
                     <div class="row justify-content-center mb-5" id="examples-list"></div>
                 </div>
