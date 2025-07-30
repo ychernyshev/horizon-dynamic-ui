@@ -46,4 +46,11 @@ export class Dispatcher {
     }
 }
 
+// dispatcher.renderPolicy = {
+//     entriesList: false,
+//     showEntry: false,
+//     editEntry: true
+// };
+
+
 export const dispatcher = new Dispatcher();

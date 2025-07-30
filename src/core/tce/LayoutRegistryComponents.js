@@ -6,8 +6,9 @@ import { WelcomeScene } from "../../pages/WelcomeScene.js";
 import { QuickDocs } from "../../pages/docs/QuickDocs.js";
 import { CodeBlock } from "../../components/CodeBlock.js";
 import { ExamplesList } from "../../components/ExamplesList.js";
-import { AddEntry } from "../../components/AddEntry.js";
-import { ShowEntry } from "../../components/ShowEntry.js";
+import { AddEntry } from "../../components/entry/AddEntry.js";
+import { EntriesList } from "../../components/entry/EntriesList.js";
+import { EditEntry } from "../../components/entry/EditEntry.js";
 import { Footer } from "../../components/Footer.js";
 
 export class LayoutRegistryComponents {
@@ -21,7 +22,8 @@ export class LayoutRegistryComponents {
         CodeBlock,
         ExamplesList,
         AddEntry,
-        ShowEntry,
+        EntriesList,
+        EditEntry,
         Footer,
     });
 }

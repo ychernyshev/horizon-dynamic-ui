@@ -2,9 +2,10 @@ import {SceneDispatcher} from "../core/dispatcher/SceneDispatcher.js";
 
 // Helpers
 import {renderTemplate} from "../core/helpers/renderTemplate.js";
+import {dispatcher} from "../core/helpers/useDispatcher.js";
 
 // Components
-import {AddEntry} from "../components/AddEntry.js";
+import {AddEntry} from "../components/entry/AddEntry.js";
 
 // AddEntry.mount();
 // AddEntry.onMount();
@@ -45,7 +46,15 @@ export const WelcomeScene = {
                             <section id="add-entry"></section>
                         </div>
                         <div class="col-xl-6">
-                            <section id="show-entry"></section>
+                            <div class="row">
+                                <div class="col-xl-10">
+                                    <section id="edit-entry"></section>
+                                </div>
+                                <div class="col-xl-2" style="display: none">
+                                    <ul id="entries-list"></ul>
+                                </div>
+                            </div>
+                            <section id="edit-entry"></section>
                         </div>
                     </div>
                     <div class="row justify-content-center mb-5" id="examples-list"></div>
@@ -76,15 +85,48 @@ export const WelcomeScene = {
     onMount() {
         console.log("welcome onMount");
 
+        const STORAGE_KEY = "notes";
+
         SceneDispatcher.subscribe("add-entry/save", payload => {
-            const notes = JSON.parse(localStorage.getItem("notes") || "[]");
-            const updatedNotes = [...notes, typeof payload === "string" ? payload : payload.text];
+            const notes = dispatcher.get(STORAGE_KEY) || [];
 
-            // 1. Зберегти в Local Storage
-            localStorage.setItem("notes", JSON.stringify(updatedNotes));
+            const newEntry = typeof payload === "string"
+                ? {id: Date.now(), text: payload, timestamp: new Date().toISOString()}
+                : {
+                    id: Date.now(),
+                    text: payload.text,
+                    timestamp: new Date().toISOString()
+                };
 
-            // 2. Синхронізувати Dispatcher
-            SceneDispatcher.set("notes", updatedNotes);
+            const updatedNotes = [...notes, newEntry];
+
+            console.log("[Debug] Notes before saving:", updatedNotes); // для перевірки
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedNotes));
+            dispatcher.set(STORAGE_KEY, updatedNotes); // без JSON.parse — бо ти вже серіалізував
+
         });
+
+
+        // SceneDispatcher.subscribe("add-entry/save", payload => {
+        //     const notes = JSON.parse(localStorage.getItem("notes") || "[]");
+        //     // const updatedNotes = [...notes, typeof payload === "string" ? payload : payload.text];
+        //     const newEntry = typeof payload === "string"
+        //         ? {id: Date.now(), text: payload, timestamp: new Date().toISOString()}
+        //         : {
+        //             id: Date.now(),
+        //             text: payload.text,
+        //             timestamp: new Date().toISOString()
+        //         };
+        //
+        //     const updatedNotes = [...notes, newEntry];
+        //
+        //
+        //     // 1. Зберегти в Local Storage
+        //     localStorage.setItem("notes", JSON.stringify(updatedNotes));
+        //
+        //     // 2. Синхронізувати Dispatcher
+        //     SceneDispatcher.set("notes", updatedNotes);
+        // });
     }
 }

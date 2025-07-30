@@ -12,14 +12,18 @@ export const LayoutRegistryScheme = {
                   <section id="welcome-block"></section>
                 </main>
             `,
-        layout: ["WelcomeView", "QuickDocs", "CodeBlock", "ExamplesList", "AddEntry", "ShowEntry", "Footer"],
+        layout: [
+            "WelcomeView", "QuickDocs", "CodeBlock",
+            "ExamplesList", "AddEntry", "EntriesList",
+            "EditEntry", "Footer",
+        ],
         config: {
             WelcomeView: {
                 title: "Horizon Dynamic UI",
                 subtitle: "Your scene-driven front-end engine",
                 version: "v0.9.0 Beta",
                 tagline: "Pure JS. No build. Host-ready.",
-                CTA: "View Documentation → #docs"
+                CTA: "Get Started with Horizon"
             },
             QuickDocs: {
                 links: [
