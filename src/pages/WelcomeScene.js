@@ -4,13 +4,6 @@ import {SceneDispatcher} from "../core/dispatcher/SceneDispatcher.js";
 import {renderTemplate} from "../core/helpers/renderTemplate.js";
 import {dispatcher} from "../core/helpers/useDispatcher.js";
 
-// Components
-import {AddEntry} from "../components/entry/AddEntry.js";
-
-// AddEntry.mount();
-// AddEntry.onMount();
-
-
 export const WelcomeScene = {
     template: ` <div class="container-fluid mt-5">
                     <div class="row justify-content-center align-items-center" style="height: 100vh">
@@ -59,7 +52,9 @@ export const WelcomeScene = {
                     </div>
                     <div class="row justify-content-center mb-5" id="examples-list"></div>
                 </div>
+                <div id="horizon-messages"></div>
                 <section id="footer"></section>
+
     `,
     mount(config = {}) {
         const container = document.getElementById("welcome-block");
@@ -71,20 +66,29 @@ export const WelcomeScene = {
 
         const {title, subtitle, version, tagline, CTA} = config;
 
+        const rawCTA = config.CTA || "";
+        const parts = rawCTA.split("→").map(part => part.trim());
+
+        const CTA_label = parts[0];
+        const CTA_link = parts[1] || "#page404"; // ← дефолтне посилання, якщо нема
+
         const processedConfig = {
             ...config,
-            CTA_button: config.CTA
-                ? `<a href="${config.CTA.split("→ ")[1]}" class="btn bg-gradient-info mt-3 fs-6">
-                ${config.CTA.split("→ ")[0]}
-                <span class="badge">${config.version}</span>
-               </a>` : ""
-        };
+            CTA_button: `<a href="${CTA_link}" class="btn bg-gradient-info mt-3 fs-6">
+                        ${CTA_label}
+                        <span class="badge">${config.version}</span>
+                      </a>`
+                    };
+
 
         container.innerHTML = renderTemplate(this.template, processedConfig);
-    },
-    onMount() {
-        console.log("welcome onMount");
 
+        if (typeof this.onMount === "function") {
+            this.onMount();
+        }
+    },
+
+    onMount() {
         const STORAGE_KEY = "notes";
 
         SceneDispatcher.subscribe("add-entry/save", payload => {
@@ -100,33 +104,10 @@ export const WelcomeScene = {
 
             const updatedNotes = [...notes, newEntry];
 
-            console.log("[Debug] Notes before saving:", updatedNotes); // для перевірки
+            console.log("[Debug] Notes before saving:", updatedNotes);
 
             localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedNotes));
-            dispatcher.set(STORAGE_KEY, updatedNotes); // без JSON.parse — бо ти вже серіалізував
-
+            dispatcher.set(STORAGE_KEY, updatedNotes);
         });
-
-
-        // SceneDispatcher.subscribe("add-entry/save", payload => {
-        //     const notes = JSON.parse(localStorage.getItem("notes") || "[]");
-        //     // const updatedNotes = [...notes, typeof payload === "string" ? payload : payload.text];
-        //     const newEntry = typeof payload === "string"
-        //         ? {id: Date.now(), text: payload, timestamp: new Date().toISOString()}
-        //         : {
-        //             id: Date.now(),
-        //             text: payload.text,
-        //             timestamp: new Date().toISOString()
-        //         };
-        //
-        //     const updatedNotes = [...notes, newEntry];
-        //
-        //
-        //     // 1. Зберегти в Local Storage
-        //     localStorage.setItem("notes", JSON.stringify(updatedNotes));
-        //
-        //     // 2. Синхронізувати Dispatcher
-        //     SceneDispatcher.set("notes", updatedNotes);
-        // });
     }
 }

@@ -1,5 +1,6 @@
 import {renderTemplate} from "../../core/helpers/renderTemplate.js";
 import {dispatcher} from "../../core/helpers/useDispatcher.js";
+import {useMessages} from "../../core/helpers/useMessages.js";
 
 export const AddEntry = {
     template: `
@@ -39,6 +40,9 @@ export const AddEntry = {
             dispatcher.set(STORAGE_KEY, [...existing, newEntry]);
 
             input.value = "";
+
+            const messages = useMessages();
+            messages.success("saved");
         });
     },
 };
