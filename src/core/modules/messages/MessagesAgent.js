@@ -1,4 +1,4 @@
-export class HorizonMessages {
+export class MessagesAgent {
     constructor() {
         this.queue = [];
         this.container = null;
@@ -8,7 +8,7 @@ export class HorizonMessages {
     init() {
         this.container = document.querySelector('#horizon-messages');
         if (!this.container) {
-            console.warn('[HorizonMessages] Container #horizon-messages not found - component not mounted.');
+            console.warn('[MessagesAgent] Container #horizon-messages not found - component not mounted.');
         }
     }
 

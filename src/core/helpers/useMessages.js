@@ -1,5 +1,5 @@
-import {HorizonMessages} from "../modules/messages/HorizonMessages.js";
+import {MessagesAgent} from "../modules/messages/MessagesAgent.js";
 
 export function useMessages() {
-  return new HorizonMessages();
+  return new MessagesAgent();
 }
