@@ -1,4 +1,4 @@
-// scss-docs-start alert-variant-mixin
+// scss-guide-start alert-variant-mixin
 @mixin alert-variant($background, $border, $color) {
   --#{$prefix}alert-color: #{$color};
   --#{$prefix}alert-bg: #{$background};
@@ -12,4 +12,4 @@
     color: shade-color($color, 20%);
   }
 }
-// scss-docs-end alert-variant-mixin
+// scss-guide-end alert-variant-mixin

@@ -3,13 +3,16 @@ import { Page_404_View } from "../../pages/reports/Page_404_View.js";
 import { WelcomeScene } from "../../pages/WelcomeScene.js";
 
 // Components
-import { QuickDocs } from "../../pages/docs/QuickDocs.js";
+import { QuickDocs } from "../../pages/guide/QuickDocs.js";
 import { CodeBlock } from "../../components/CodeBlock.js";
 import { ExamplesList } from "../../components/ExamplesList.js";
 import { AddEntry } from "../../components/entry/AddEntry.js";
 import { EntriesList } from "../../components/entry/EntriesList.js";
 import { EditEntry } from "../../components/entry/EditEntry.js";
 import { Footer } from "../../components/Footer.js";
+
+// Guide
+import { GuideMain } from "../../pages/guide/GuideMain.js";
 
 export class LayoutRegistryComponents {
     static
@@ -25,5 +28,7 @@ export class LayoutRegistryComponents {
         EntriesList,
         EditEntry,
         Footer,
+        // Guide
+        GuideMain,
     });
 }

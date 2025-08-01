@@ -2,7 +2,7 @@
 @include bsBanner("");
 
 
-// scss-docs-start import-stack
+// scss-guide-start import-stack
 // Configuration
 @import "functions";
 @import "variables";
@@ -48,4 +48,4 @@
 
 // Utilities
 @import "utilities/api";
-// scss-docs-end import-stack
+// scss-guide-end import-stack

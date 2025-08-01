@@ -1,7 +1,7 @@
 // stylelint-disable function-disallowed-list
 
 %offcanvas-css-vars {
-  // scss-docs-start offcanvas-css-vars
+  // scss-guide-start offcanvas-css-vars
   --#{$prefix}offcanvas-zindex: #{$zindex-offcanvas};
   --#{$prefix}offcanvas-width: #{$offcanvas-horizontal-width};
   --#{$prefix}offcanvas-height: #{$offcanvas-vertical-height};
@@ -12,7 +12,7 @@
   --#{$prefix}offcanvas-border-width: #{$offcanvas-border-width};
   --#{$prefix}offcanvas-border-color: #{$offcanvas-border-color};
   --#{$prefix}offcanvas-box-shadow: #{$offcanvas-box-shadow};
-  // scss-docs-end offcanvas-css-vars
+  // scss-guide-end offcanvas-css-vars
 }
 
 @each $breakpoint in map-keys($grid-breakpoints) {

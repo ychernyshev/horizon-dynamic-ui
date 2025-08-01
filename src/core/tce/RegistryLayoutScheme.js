@@ -6,6 +6,15 @@ export const LayoutRegistryScheme = {
             Page404: {title: '404. Page not found'},
         },
     },
+    guide: {
+        primary_structure: `
+            <div class="container" id="guide-container"></div>
+        `,
+        layout: [
+            "GuideMain",
+        ],
+        config: {},
+    },
     welcome_view: {
         primary_structure: `
                 <main>
@@ -23,11 +32,11 @@ export const LayoutRegistryScheme = {
                 subtitle: "Your scene-driven front-end engine",
                 version: "v0.9.0 Beta",
                 tagline: "Pure JS. No build. Host-ready.",
-                CTA: "Get Started with Horizon"
+                CTA: {label: "Get Started with Horizon", link: "#guide"},
             },
             QuickDocs: {
                 links: [
-                    {label: "📘 What is Horizon?", href: "#docs"},
+                    {label: "📘 What is Horizon?", href: "#guide"},
                     {label: "🚀 Creating Your First Scene", href: "#first-scene"},
                     {label: "🧩 Component Structure", href: "#components"}
                 ]

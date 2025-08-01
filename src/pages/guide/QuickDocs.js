@@ -1,6 +1,6 @@
 export const QuickDocs = {
   mount(params = {}) {
-    const container = document.getElementById("quick-docs");
+    const container = document.getElementById("quick-guide");
     if (!container) return;
 
     const links = params.links || [];

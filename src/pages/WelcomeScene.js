@@ -66,19 +66,16 @@ export const WelcomeScene = {
 
         const {title, subtitle, version, tagline, CTA} = config;
 
-        const rawCTA = config.CTA || "";
-        const parts = rawCTA.split("→").map(part => part.trim());
-
-        const CTA_label = parts[0];
-        const CTA_link = parts[1] || "#page404"; // ← дефолтне посилання, якщо нема
+        const CTA_label = config.CTA?.label || "Explore";
+        const CTA_link = config.CTA?.link?.trim() ? config.CTA.link : "#page404";
 
         const processedConfig = {
             ...config,
             CTA_button: `<a href="${CTA_link}" class="btn bg-gradient-info mt-3 fs-6">
-                        ${CTA_label}
-                        <span class="badge">${config.version}</span>
-                      </a>`
-                    };
+                 ${CTA_label}
+                 <span class="badge">${config.version}</span>
+               </a>`
+        };
 
 
         container.innerHTML = renderTemplate(this.template, processedConfig);

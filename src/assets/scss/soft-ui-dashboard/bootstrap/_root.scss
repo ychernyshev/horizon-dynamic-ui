@@ -35,7 +35,7 @@
   --#{$prefix}gradient: #{$gradient};
 
   // Root and body
-  // scss-docs-start root-body-variables
+  // scss-guide-start root-body-variables
   @if $font-size-root != null {
     --#{$prefix}root-font-size: #{$font-size-root};
   }
@@ -48,9 +48,9 @@
     --#{$prefix}body-text-align: #{$body-text-align};
   }
   --#{$prefix}body-bg: #{$body-bg};
-  // scss-docs-end root-body-variables
+  // scss-guide-end root-body-variables
 
-  // scss-docs-start root-border-var
+  // scss-guide-start root-border-var
   --#{$prefix}border-width: #{$border-width};
   --#{$prefix}border-style: #{$border-style};
   --#{$prefix}border-color: #{$border-color};
@@ -62,7 +62,7 @@
   --#{$prefix}border-radius-xl: #{$border-radius-xl};
   --#{$prefix}border-radius-2xl: #{$border-radius-2xl};
   --#{$prefix}border-radius-pill: #{$border-radius-pill};
-  // scss-docs-end root-border-var
+  // scss-guide-end root-border-var
 
   --#{$prefix}link-color: #{$link-color};
   --#{$prefix}link-hover-color: #{$link-hover-color};
