@@ -1,4 +1,4 @@
-export const LayoutRegistryScheme = {
+export const RegistryLayoutScheme = {
     page_404: {
         primary_structure: ``,
         layout: ["Page404"],
@@ -11,9 +11,14 @@ export const LayoutRegistryScheme = {
             <div class="container" id="guide-container"></div>
         `,
         layout: [
-            "GuideMain",
+            "GuideMain", "GuideNavigation", "GuideDescription",
         ],
-        config: {},
+        config: {
+            GuideMain: {
+                title: "Horizon Dynamic UI",
+                name: "title",
+            },
+        },
     },
     welcome_view: {
         primary_structure: `
@@ -42,19 +47,19 @@ export const LayoutRegistryScheme = {
                 ]
             },
             CodeBlock: {
-            codeSnippets: {
-                example_js: {
-                    title: 'example_js',
-                    language: "js",
-                    content: `const msg = "Hello Horizon";`
-                },
-                example_html: {
-                    title: 'example_html',
-                    language: "html",
-                    content: `<div id="app"></div>`
+                codeSnippets: {
+                    example_js: {
+                        title: 'example_js',
+                        language: "js",
+                        content: `const msg = "Hello Horizon";`
+                    },
+                    example_html: {
+                        title: 'example_html',
+                        language: "html",
+                        content: `<div id="app"></div>`
+                    }
                 }
-            }
-        },
+            },
         },
         linkHref: ["https://unpkg.com/prismjs/themes/prism.css"],
         scriptSrc: ["https://unpkg.com/prismjs/prism.js", "https://unpkg.com/prismjs/components/prism-javascript.min.js"],

@@ -1,6 +1,6 @@
 import {SceneDispatcher} from "../dispatcher/SceneDispatcher.js";
 import {dispatcher} from "../helpers/useDispatcher.js";
-import {LayoutRegistryScheme} from "./RegistryLayoutScheme.js";
+import {RegistryLayoutScheme} from "./RegistryLayoutScheme.js";
 import {LayoutRegistryComponents} from './LayoutRegistryComponents.js';
 
 // Helpers
@@ -28,7 +28,7 @@ export class SceneManager {
         }, 500);
 
         SceneDispatcher.subscribe("go", sceneName => {
-            const scene = LayoutRegistryScheme[sceneName];
+            const scene = RegistryLayoutScheme[sceneName];
             if (scene) {
                 this.mountScene(scene);
             } else {
@@ -44,7 +44,7 @@ export class SceneManager {
 
     mountScene(sceneName, targetId = "app") {
         const root = document.getElementById(targetId);
-        const scene = LayoutRegistryScheme[sceneName];
+        const scene = RegistryLayoutScheme[sceneName];
         if (!scene) return this.mountScene("page_404");
 
         useAssets(sceneName);

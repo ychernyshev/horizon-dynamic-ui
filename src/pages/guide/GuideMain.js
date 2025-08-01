@@ -13,18 +13,16 @@ import {renderTemplate} from "../../core/helpers/renderTemplate.js";
 
 export const GuideMain = {
     template: `
+        <div class="row border-bottom">
+            <a href="#welcome" class="mt-3">
+                <p class="text-gradient text-info display-6">{title}</p>
+            </a>
+        </div>
         <div class="row">
-            <div class="col-xl-3">
-                <div class="row">
-                    <div class="col-xl-12">
-                        
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-12" id="guide-navigation"></div>
-                </div>
+            <div class="col-xl-3" style="height: 91vh">
+                <div class="col-xl-12 border-end h-100 p-3" id="guide-navigation"></div>
             </div>
-            <div class="col-xl-8" id="guide-description">Description</div>
+            <div class="col-xl-9 p-3" id="guide-description"></div>
         </div> 
     `,
     mount(config = {}) {
@@ -34,6 +32,8 @@ export const GuideMain = {
             console.warn("[GuideMain] Container #guide-container not found - component not mounted.");
             return;
         }
+
+        const {title} = config
 
         container.innerHTML = renderTemplate(this.template, config);
     },

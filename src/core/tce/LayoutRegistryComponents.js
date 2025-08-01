@@ -13,6 +13,8 @@ import { Footer } from "../../components/Footer.js";
 
 // Guide
 import { GuideMain } from "../../pages/guide/GuideMain.js";
+import { GuideNavigation } from "../../components/guide/GuideNavigation.js";
+import { GuideDescription } from "../../components/guide/GuideDescription.js";
 
 export class LayoutRegistryComponents {
     static
@@ -30,5 +32,7 @@ export class LayoutRegistryComponents {
         Footer,
         // Guide
         GuideMain,
+        GuideNavigation,
+        GuideDescription,
     });
 }
