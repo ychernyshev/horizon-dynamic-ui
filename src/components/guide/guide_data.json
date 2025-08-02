@@ -1,41 +1,151 @@
 {
-  "en": {
-
-  },
+  "en": {},
   "uk": {
     "Початок": {
-      "Вступ": "Horizon Dynamic UI — це автономна UI-система, що мислить у термінах сцен, агентів і потоків.",
-      "Швидкий старт": "Підключи core.js, створи Welcome.scene.js, і запусти через LayoutRegistryScheme."
+      "Вступ": [
+        {
+          "type": "text",
+          "content": "Horizon Dynamic UI — це автономна UI-система, що мислить у термінах сцен, агентів і потоків."
+        }
+      ],
+      "Швидкий старт": [
+        {
+          "type": "text",
+          "content": "Підключи core.js, створи Welcome.scene.js, і запусти через LayoutRegistryScheme."
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "import { Horizon } from './core.js';\nHorizon.load('Welcome.scene.js');"
+        }
+      ]
     },
     "Основи роботи": {
-      "Синтаксис шаблону": "",
-      "Налаштування сцени/компоненту у RegistryLayoutScheme": "Макет, що тримає реєстр компонентів",
-      "Реєстрація сцени/компоненту у LayoutRegistryComponents": "Реєстр схем макетів",
-      "Прив'язування стилів та скриптів": "",
-      "Створення посилань та кнопок": "",
-      "Виклик messages": "",
-      "Блок коду": ""
+      "Налаштування сцени/компоненту у RegistryLayoutScheme": [
+        {
+          "type": "text",
+          "content": "Макет, що тримає реєстр компонентів"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "RegistryLayoutScheme.register({ scene: WelcomeScene });"
+        }
+      ],
+      "Реєстрація сцени/компоненту у LayoutRegistryComponents": [
+        {
+          "type": "text",
+          "content": "Реєстр схем макетів"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "LayoutRegistryComponents.add('welcome', WelcomeScene);"
+        }
+      ],
+      "Прив'язування стилів та скриптів": [
+        {
+          "type": "text",
+          "content": "Прив'язування стилів та скриптів"
+        }
+      ],
+      "Створення посилань та кнопок": [
+        {
+          "type": "text",
+          "content": "Створення посилань та кнопок"
+        }
+      ],
+      "Виклик messages": [
+        {
+          "type": "text",
+          "content": "Виклик messages"
+        }
+      ],
+      "Блок коду": [
+        {
+          "type": "text",
+          "content": "Блок коду"
+        }
+      ]
     },
     "Глибше занурення у компоненти": {
-      "renderTemplate": "",
-      "mount()": "",
-      "onMount()": "",
-      "config": "const {title} = config | const {codeSnippets = {}} = params; | this.onMount(config); | "
+      "config": [
+        {
+          "type": "code",
+          "language": "js",
+          "content": "const {title} = config;"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "const {codeSnippets = {}} = params;"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "this.onMount(config);"
+        }
+      ]
     },
     "Роутинг": {
-      "Хеш-посилання": "",
-      "Створення {CTA_button}": "",
-      "Використання useCTA() хелпера": ""
+      "Хеш-посилання": [
+        {
+          "type": "text",
+          "content": "Хеш-посилання"
+        }
+      ],
+      "Створення {CTA_button}": [
+        {
+          "type": "text",
+          "content": "Створення {CTA_button}"
+        }
+      ],
+      "Використання useCTA() хелпера": [
+        {
+          "type": "text",
+          "content": "Використання useCTA() хелпера"
+        }
+      ]
     },
     "Реактивна підсистема": {
-      "Робота з Dispatcher": "",
-      "SceneMount": "",
-      "MessagesAgent": ""
+      "Робота з Dispatcher": [
+        {
+          "type": "text",
+          "content": "Робота з Dispatcher"
+        }
+      ],
+      "SceneMount": [
+        {
+          "type": "text",
+          "content": "SceneMount"
+        }
+      ],
+      "MessagesAgent": [
+        {
+          "type": "text",
+          "content": "MessagesAgent"
+        }
+      ]
     },
     "Збереження даних у localStorage": {
-      "Додавання":  "",
-      "Завантаження": "",
-      "Видалення": ""
+      "Додавання":  [
+        {
+          "type": "text",
+          "content": "Додавання"
+        }
+      ],
+      "Завантаження": [
+        {
+          "type": "text",
+          "content": "Завантаження"
+        }
+      ],
+      "Видалення": [
+        {
+          "type": "text",
+          "content": "Видалення"
+        }
+      ]
     }
   }
 }
