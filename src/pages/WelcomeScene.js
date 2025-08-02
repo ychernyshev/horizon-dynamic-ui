@@ -14,7 +14,7 @@ export const WelcomeScene = {
                             <p class="col-xl-10 lead mx-auto text-end">Let\`s go improvise on your stage</p>
                         </div>
                         <div class="card bg-soft-ui p-2 text-center mt-5 mb-5">
-                            <h5>It is a JavaScript framework to develop static templates and websites for GitHub or Netlify with dynamic functionality without Node.js</h5>
+                            <h5>It is a JavaScript framework to develop static templates and websites for static hosting like GitHub or Netlify, with dynamic functionality, without Node.js</h5>
                         </div>
                             <p>
                                 <span class="lead">The philosophy: </span>
