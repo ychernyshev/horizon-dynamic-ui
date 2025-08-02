@@ -134,7 +134,7 @@
           "content": "Додавання"
         }
       ],
-      "Завантаження": [
+      "Зчитування": [
         {
           "type": "text",
           "content": "Завантаження"
@@ -144,6 +144,56 @@
         {
           "type": "text",
           "content": "Видалення"
+        }
+      ]
+    },
+    "Хелпери": {
+      "renderTemplate": [
+        {
+          "type": "text",
+          "content": "renderTemplate"
+        }
+      ],
+      "useAssets": [
+        {
+          "type": "text",
+          "content": "renderTemplate"
+        }
+      ],
+      "useCTA": [
+        {
+          "type": "text",
+          "content": "useCTA"
+        }
+      ],
+      "useDispatcher": [
+        {
+          "type": "text",
+          "content": "useDispatcher"
+        }
+      ],
+      "useHighlight": [
+        {
+          "type": "text",
+          "content": "useHighlight"
+        }
+      ],
+      "useLocalStorage": [
+        {
+          "type": "text",
+          "content": "useLocalStorage"
+        }
+      ],
+      "useMessages": [
+        {
+          "type": "text",
+          "content": "useMessages"
+        }
+      ],
+      "useRouting": [
+        {
+          "type": "text",
+          "content": "useRouting"
         }
       ]
     }
