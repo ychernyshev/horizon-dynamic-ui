@@ -11,7 +11,7 @@ export const RegistryLayoutScheme = {
             <div class="container" id="guide-container"></div>
         `,
         layout: [
-            "GuideMain", "GuideNavigation", "GuideDescription",
+            "GuideMain", "GuideNavigation", "GuideMenuItem", "GuideDescription"
         ],
         config: {
             GuideMain: {

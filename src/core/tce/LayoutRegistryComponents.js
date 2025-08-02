@@ -14,6 +14,7 @@ import { Footer } from "../../components/Footer.js";
 // Guide
 import { GuideMain } from "../../pages/guide/GuideMain.js";
 import { GuideNavigation } from "../../components/guide/GuideNavigation.js";
+import { GuideMenuItem } from "../../components/guide/GuideMenuItem.js";
 import { GuideDescription } from "../../components/guide/GuideDescription.js";
 
 export class LayoutRegistryComponents {
@@ -33,6 +34,7 @@ export class LayoutRegistryComponents {
         // Guide
         GuideMain,
         GuideNavigation,
+        GuideMenuItem,
         GuideDescription,
     });
 }

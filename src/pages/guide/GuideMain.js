@@ -20,9 +20,9 @@ export const GuideMain = {
         </div>
         <div class="row">
             <div class="col-xl-3" style="height: 91vh">
-                <div class="col-xl-12 border-end h-100 p-3" id="guide-navigation"></div>
+                <div style="overflow-y: scroll" class="col-xl-12 border-end h-100 p-3" id="guide-navigation"></div>
             </div>
-            <div class="col-xl-9 p-3" id="guide-description"></div>
+            <div style="overflow-y: scroll" class="col-xl-9 p-3" id="guide-description"></div>
         </div> 
     `,
     mount(config = {}) {
