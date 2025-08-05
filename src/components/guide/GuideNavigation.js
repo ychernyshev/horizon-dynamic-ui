@@ -13,7 +13,7 @@ export const GuideNavigation = {
                     <button type="button" class="btn btn-white border p-2 my-auto">EN</button>
                 </div>
                 <div class="col-xl-6 text-end">
-                    <span style="font-weight: 300">v1.0.0</span>
+                    <span style="font-weight: 300">v0.1.19</span>
                 </div>
             </p>
             <div id="guide-menu-item"></div>
