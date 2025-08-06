@@ -9,7 +9,7 @@ export const GuideDescription = {
       console.warn("[GuideDescription] Container #guide-description not found - component not mounted.");
       return;
     }
-
+    
     container.innerHTML = renderTemplate(this.template, config);
     this.onMount();
   },

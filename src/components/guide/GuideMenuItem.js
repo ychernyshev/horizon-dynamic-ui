@@ -22,33 +22,33 @@ export const GuideMenuItem = {
 
                 if (hasContent) {
                     subtitleHTML += `
-            <p class="d-flex my-auto">
-              <a href="#" data-topic="${sectionTitle}::${subkey}" role="button">
-                ${subkey}
-              </a>
-            </p>
-          `;
+                        <p class="d-flex my-auto">
+                          <a href="#" data-topic="${sectionTitle}::${subkey}" role="button">
+                            ${subkey}
+                          </a>
+                        </p>
+                     `;
                 }
             });
 
             if (subtitleHTML !== "") {
                 menuHTML += `
-          <p class="d-inline-flex gap-1">
-            <a data-bs-toggle="collapse" href="#${collapseID}" role="button"
-               aria-expanded="false" aria-controls="${collapseID}">
-              ${sectionTitle}
-            </a>
-          </p>
-          <div class="row">
-            <div class="col">
-              <div class="collapse multi-collapse" id="${collapseID}">
-                <div class="card card-body h-100">
-                  ${subtitleHTML}
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
+                  <p class="d-inline-flex gap-1">
+                    <a data-bs-toggle="collapse" href="#${collapseID}" role="button"
+                       aria-expanded="false" aria-controls="${collapseID}">
+                      ${sectionTitle}
+                    </a>
+                  </p>
+                  <div class="row">
+                    <div class="col">
+                      <div class="collapse multi-collapse" id="${collapseID}">
+                        <div class="card card-body h-100">
+                          ${subtitleHTML}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                `;
             }
         });
 
