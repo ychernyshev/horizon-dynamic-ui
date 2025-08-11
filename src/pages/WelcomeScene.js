@@ -5,9 +5,9 @@ import {renderTemplate} from "../core/helpers/renderTemplate.js";
 import {dispatcher} from "../core/helpers/useDispatcher.js";
 
 export const WelcomeScene = {
-    template: ` <div class="container-fluid mt-5">
-                    <div class="row justify-content-center align-items-center" style="height: 92vh">
-                        <div class="col-xxl-4 col-xl-6 col-lg-10 text-center">
+    template: ` <div class="container-fluid d-flex align-items-center" style="height: 95vh">
+                    <div class="row justify-content-center">
+                        <div class="col-xxl-4 col-xl-6 col-lg-10 text-center mt-5 mb-4">
                             <p class="col-xl-5 display-6">Welcome</p>
                             <div>
                                 <p class="text-gradient text-info mb-3 display-4">{title}</p>
@@ -15,19 +15,20 @@ export const WelcomeScene = {
                             </div>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="card col-xl-6 bg-soft-ui p-2 text-center mt-5 mb-5">
+                            <div class="card col-xxl-4 col-xl-6 bg-soft-ui p-2 text-center">
                                 <h5>It is a JavaScript framework to develop static templates and websites for static hosting like GitHub or Netlify, with dynamic functionality, without Node.js</h5>
                             </div>
                         </div>
-                        <div class="row justify-content-center">
-                        <div class="col-xl-6 text-center mt-5 mb-5">
-                            <p>
-                                <span class="lead">The philosophy: </span>
-                                <span class="text-secondary">{subtitle}.</span>
-                            </p>
-                            <p class="lead">{tagline}</p>
-    
-                            {CTA_button}</div>
+                        <div class="row justify-content-center mt-5 mb-4">
+                            <div class="col-xl-6 text-center">
+                                <p>
+                                    <span class="lead">The philosophy: </span>
+                                    <span class="text-secondary">{subtitle}.</span>
+                                </p>
+                                <p class="lead">{tagline}</p>
+        
+                                {CTA_button}
+                            </div>
                         </div>
                     </div>
                 </div>
