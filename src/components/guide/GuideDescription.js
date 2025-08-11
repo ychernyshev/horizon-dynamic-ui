@@ -1,7 +1,9 @@
 import { renderTemplate } from "../../core/helpers/renderTemplate.js";
 
 export const GuideDescription = {
-  template: ``,
+  template: `
+    <section id="code-block"></section>
+  `,
 
   mount(config = {}) {
     const container = document.getElementById("guide-description");

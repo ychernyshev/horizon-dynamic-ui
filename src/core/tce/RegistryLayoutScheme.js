@@ -11,7 +11,8 @@ export const RegistryLayoutScheme = {
             <div class="container" id="guide-container"></div>
         `,
         layout: [
-            "GuideMain", "GuideNavigation", "GuideMenuItem", "GuideDescription"
+            "GuideMain", "GuideNavigation", "GuideMenuItem", "GuideDescription",
+            "CodeBlock",
         ],
         config: {
             GuideMain: {
@@ -19,6 +20,8 @@ export const RegistryLayoutScheme = {
                 name: "title",
             },
         },
+        linkHref: ["https://unpkg.com/prismjs/themes/prism.css"],
+        scriptSrc: ["https://unpkg.com/prismjs/prism.js", "https://unpkg.com/prismjs/components/prism-javascript.min.js"],
     },
     welcome_view: {
         primary_structure: `
