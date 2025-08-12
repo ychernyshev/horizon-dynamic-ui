@@ -88,12 +88,97 @@
       "Швидкий старт": [
         {
           "type": "text",
-          "content": "Це елементарна маніпуляція, що дозволить вивести твою першу сцену на екран."
+          "content": "Ця елементарна маніпуляція, дозволить вивести твою першу сцену на екран."
+        },
+        {
+          "type": "text",
+          "content": "Для цього потрібно почати зі створення самої сцени, або компоненту для неї, шляхом створення файлу із розширенням <b>*.js</b>."
+        },
+        {
+          "type": "text",
+          "content": "Існує два стилі шаблону - <b>імперативний</b> та <b>декларативний</b>, в межах котрих програмується сцена чи компонент для неї.  Не існує обмежень для використання кожного з них. Однак, для кожного з них закладена своя логіка використання."
+        },
+        {
+          "type": "text",
+          "content": "<b>Імперативний</b> стиль, на прикладі сторінки <b>404</b>, має наступний вигляд:"
         },
         {
           "type": "code",
           "language": "js",
-          "content": "import { Horizon } from './core.js';\nHorizon.load('Welcome.scene.js');"
+          "content": "export const Page_404_View = {\n    mount(config = {}) {\n        const container = document.getElementById(\"app\");\n\n        if (!container) {\n            console.warn(\"[Page_404_View] Контейнер #page_404 не знайдено — компонент не змонтовано.\");\n            return;\n        }\n\n        container.innerHTML = `\n             ...Code...\n        `;\n    }\n}"
+        },
+        {
+          "type": "text",
+          "content": "Задум використання імперативного стилю, полягає у ідеї, що у конкретному компоненті, іноді, сцені, не прогнозується використання логіки. Однак, знову ж таки, використання її не забороняється. Хоча, керування нею на сторінці вже виглядатиме не таким зручним, як у декларативному стилі сцени чи компоненту для неї."
+        },
+        {
+          "type": "text",
+          "content": "<b>Декларативний</b> стиль, навпроти, передбачає використання логіки у сцені чи то компоненті до неї, тому, виглядає дещо інакше, дозволяючи реалізувати цю логіку більш простим методом:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "export const WelcomeScene = {\n    template: `\n        ...Code...\n    `,\n    mount(config = {}) {\n        const container = document.getElementById(\"welcome-block\");\n\n        if (!container) {\n            console.warn(\"[WelcomeScene] Container #welcome-block not found - component not mounted.\");\n            return;\n        }\n\n        container.innerHTML = renderTemplate(this.template, config);\n\n        if (typeof this.onMount === \"function\") {\n            this.onMount();\n        }\n    },\n    onMount() {}\n}"
+        },
+        {
+          "type": "text",
+          "content": "У цьому варіанті стилю, кодом на сцені чи у компоненті виходить маніпулювати через блок коду <b>template</b>, що значно полегшує цю процедуру, уникаючи прямої ініціалізації контенту сторінки безпосередньо у <b>container.innerHTML = `...сode...`;</b>"
+        },
+        {
+          "type": "text",
+          "content": "Якщо блок коду <b>mount() {}</b> є точкою входу, то блок коду <b>onMount() {}</b> дозволяє розвантажити <b>mount() {}</b>, зосередивши у собі усю логіку, що має бути реалізована у компоненті (сцена, по суті, теж є компонентом, хоча її роль, бути батьківським компонентом для всіх інших її компонентів), після її створення. Назва <b>onMount</b> закладає під собою розуміння того, що код, заключений саме у цей блок почне виконуватися лише після того, як DOM буде побудовано. Але це не зобов'язує тримати <b>mount() {}</b> чистим від коду. На прикладі <b>WelcomeScene</b>, <b>mount</b> теж виконує деякі маніпуляції. У даному випадку, зі створення кнопки переходу до розділу документації <b>DUI</b>:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "mount(config = {}) {\n        const container = document.getElementById(\"welcome-block\");\n\n        if (!container) {\n            console.warn(\"[WelcomeScene] Container #welcome-block not found - component not mounted.\");\n            return;\n        }\n\n        const {title, subtitle, version, tagline, CTA} = config;\n\n        const CTA_label = config.CTA?.label || \"Explore\";\n        const CTA_link = config.CTA?.link?.trim() ? config.CTA.link : \"#page404\";\n\n        const processedConfig = {\n            ...config,\n            CTA_button: `< a href=\"${CTA_link}\" class=\"btn bg-gradient-info mt-3 fs-6\">\n                 ${CTA_label}\n                 <span class=\"badge\">${config.version}</span>\n               < /a>`\n        };\n\n\n        container.innerHTML = renderTemplate(this.template, processedConfig);\n\n        if (typeof this.onMount === \"function\") {\n            this.onMount();\n        }\n    },"
+        },
+        {
+          "type": "text",
+          "content": "Логічно кнопку створювати саме у <b>mount() {}</b>. А от логіку, яка може бути підключена до цієї кнопки, як наприклад, відправлення даних у <b>localStorage</b>, бажано розмістити у <b>onMount() {}</b>, щоб не отримати попередження, про те, що елемент по його <b>id=''</b> ще не доступний. Наприклад, для різноманітних автоматичних дій, які варто, виконувати вже після завантаження DOM-дерева сторінки. Або, для обробки події після натиску на кнопку:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "onMount() {\n        const STORAGE_KEY = \"notes\";\n\n        SceneDispatcher.subscribe(\"add-entry/save\", payload => {\n            const notes = dispatcher.get(STORAGE_KEY) || [];\n\n            const newEntry = typeof payload === \"string\"\n                ? {id: Date.now(), text: payload, timestamp: new Date().toISOString()}\n                : {\n                    id: Date.now(),\n                    text: payload.text,\n                    timestamp: new Date().toISOString()\n                };\n\n            const updatedNotes = [...notes, newEntry];\n\n            console.log(\"[Debug] Notes before saving:\", updatedNotes);\n\n            localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedNotes));\n            dispatcher.set(STORAGE_KEY, updatedNotes);\n        });\n    }"
+        },
+        {
+        "type": "text",
+        "content": "Створений компонент необхідно зареєструвати та сконфігурувати, щоб <b>DUI</b> знав, куди компонент необхідно монтувати, які дані, наприклад <b>title</b> або якийсь статичний список вже можна передати на сцену, чи окремий компонент для неї, а також, структуру сцени, яка має бути змонтована. Останній пункт дозволяє не перевантажувати саму сцену - батьківський компонент, налаштуваннями, відповідно, нагромадженням коду. Ця логіка переслідує ідею єдиного реєстру конфігурацій усіх сцен, що наочно демонструє усю структуру застосунку без необхідності вивчати усі компоненти послідовно. А також, задля того, щоб в застосунку не було одного батьківського елементу, що, дозволяє створювати DOM на 1 елемент меншим, та дозволяє у одному застосунку мати абсолютно різні за структурою сцени, кожну, зі своєю окремою конфігурацією, що спрощує керування кожною з них."
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "welcome_view: {\n        primary_structure: `\n                < main>\n                  < section id=\"welcome-block\"></section>\n                < /main>\n            `,\n        layout: [\n            \"WelcomeView\", \"QuickDocs\", \"CodeBlock\",\n            \"ExamplesList\", \"AddEntry\", \"EntriesList\",\n            \"EditEntry\", \"Footer\",\n        ],\n        config: {\n            WelcomeView: {\n                title: \"Horizon Dynamic UI\",\n                subtitle: \"Your scene-driven front-end engine\",\n                version: \"v0.9.0 Beta\",\n                tagline: \"Pure JS. No build. Host-ready.\",\n                CTA: {label: \"Get Started with Horizon\", link: \"#guide\"},\n            },\n            QuickDocs: {\n                links: [\n                    {label: \"\uD83D\uDCD8 What is Horizon?\", href: \"#guide\"},\n                    {label: \"\uD83D\uDE80 Creating Your First Scene\", href: \"#first-scene\"},\n                    {label: \"\uD83E\uDDE9 Component Structure\", href: \"#components\"}\n                ]\n            },\n            CodeBlock: {\n                codeSnippets: {\n                    example_js: {\n                        title: 'example_js',\n                        language: \"js\",\n                        content: `const msg = \"Hello Horizon\";`\n                    },\n                    example_html: {\n                        title: 'example_html',\n                        language: \"html\",\n                        content: `<div id=\"app\"></div>`\n                    }\n                }\n            },\n        },\n        linkHref: [\"https://unpkg.com/prismjs/themes/prism.css\"],\n        scriptSrc: [\"https://unpkg.com/prismjs/prism.js\", \"https://unpkg.com/prismjs/components/prism-javascript.min.js\"],\n    }"
+        },
+        {
+        "type": "text",
+        "content": "Як можна помітити у наведеному вище відрізку коду, конфігурація дозволяє додавати до кожної окремої сцени свої, ізольовані від інших сцен, стилі та скрипти. Це опція додана та залишена саме у <b>RegistryLayoutScheme.js</b> для того, щоб не \"розкидувати\" налаштування сцен по різних файлах та компонентах, що порушує закладену вище описаний принцип роботи фреймворку."
+        },
+        {
+        "type": "text",
+        "content": "Необхідно вказати структуру нової сцени, і для цього достатньо додати її назву у список <b>layout</b>. Для <b>WelcomeScene</b> це є назва її константи - <b>WelcomeScene</b> у самому компоненті. Щоб вказати, у який контейнер сцена має бути змонтована, цей контейнер потрібно буде ініціювати у <b>primary_structure</b>. Під капотом, <b>DUI</b> через <b>SceneManager</b> зчитає конфігурацію сцени з <b>RegistryLayoutScheme.js</b>, та змонтує код з <b>primary_structure:</b> безпосередньо у <b>< body id=\"app\">< /body></b>"
+        },
+        {
+        "type": "text",
+        "content": "Заключним етапом стане додавання назви сцени у <b>ComponentMap</b>, що розташований у <b>LayoutRegistryComponents.js</b>. Якщо у <b>RegistryLayoutScheme.js</b> ініціювався список назв компонентів, що будуть присутніми на сцені, то у <b>LayoutRegistryComponents.js</b> ініціюється список всіх компонентів, доступних для відображення у застосунку. Можна створити сцени, додати туди інші компоненти та якусь логіку, сконфігурувати їх, однак, вони не будуть показані, поки ці сцени та їх компоненти не будуть додані у список компонентів застосунку. Щоб це не заплутувало, варто тримати у пам'яті, що конфігурація сцен зберігається у файлі <b>RegistryLayoutScheme.js</b> - реєстр схеми макету, а список всіх компонентів застосунку, які доступні для показу, у - <b>LayoutRegistryComponents.js</b> - макет реєстрації компонентів. Перший - це, умовно, список службовців, що працюють у компанії. Другий - список обов'язків кожного службовця окремо."
+        },
+        {
+        "type": "text",
+        "content": "Саме цей файл знімає необхідність у кожній окремій сцені робити до неї імпорти її компонентів й імпорти самих сцен для <b>SceneManager</b>, котрий ці сцени монтує. Це централізація усіх імпортів компонентів у застосунку в одному файлі. Таким чином, це створює дуже комфортні умови для операцій з \"перекидання\", підключення та відключення компонентів між сценами через конфігураційний файл <b>RegistryLayoutScheme.js</b>."
+        },
+        {
+        "type": "text",
+        "content": "<b>LayoutRegistryComponents.js</b> для поточної версії DUI:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "// Pages\nimport { Page_404_View } from \"../../pages/reports/Page_404_View.js\";\nimport { WelcomeScene } from \"../../pages/WelcomeScene.js\";\n\n// Components\nimport { QuickDocs } from \"../../pages/guide/QuickDocs.js\";\nimport { CodeBlock } from \"../../components/CodeBlock.js\";\nimport { ExamplesList } from \"../../components/ExamplesList.js\";\nimport { AddEntry } from \"../../components/entry/AddEntry.js\";\nimport { EntriesList } from \"../../components/entry/EntriesList.js\";\nimport { EditEntry } from \"../../components/entry/EditEntry.js\";\nimport { Footer } from \"../../components/Footer.js\";\n\n// Guide\nimport { GuideMain } from \"../../pages/guide/GuideMain.js\";\nimport { GuideNavigation } from \"../../components/guide/GuideNavigation.js\";\nimport { GuideMenuItem } from \"../../components/guide/GuideMenuItem.js\";\nimport { GuideDescription } from \"../../components/guide/GuideDescription.js\";\n\nexport class LayoutRegistryComponents {\n    static\n    ComponentMap = Object.freeze({\n        // sceneName\n        Page404: Page_404_View,\n        WelcomeView: WelcomeScene,\n        // componentName\n        QuickDocs,\n        CodeBlock,\n        ExamplesList,\n        AddEntry,\n        EntriesList,\n        EditEntry,\n        Footer,\n        // Guide\n        GuideMain,\n        GuideNavigation,\n        GuideMenuItem,\n        GuideDescription,\n    });\n}"
+        },
+        {
+        "type": "text",
+        "content": "Базово, це той мінімум, що необхідно знати, щоб створити свою першу сцену, використовуючи <b>Horizon Dynamic UI</b>."
         }
       ]
     },
