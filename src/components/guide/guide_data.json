@@ -229,7 +229,16 @@
       "Прив'язування стилів та скриптів": [
         {
           "type": "text",
-          "content": "Прив'язування стилів та скриптів"
+          "content": "Як й інші фреймворки, <b>DUI</b> дозволяє додавати до кожної окремої сцени свої, ізольовані від інших сцен, файли стилів та скриптів. Для цього необхідно використати ключі <b>linkHref</b> та <b>scriptSrc</b> у <b>RegistryLayoutScheme</b>:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "linkHref: [\"https://unpkg.com/prismjs/themes/prism.css\"],\nscriptSrc: [\"https://unpkg.com/prismjs/prism.js\", \"https://unpkg.com/prismjs/components/prism-javascript.min.js\"],"
+        },
+        {
+          "type": "text",
+          "content": "Додавати значення обох масивів можливо списком, якщо файлів стилів чи скриптів є декілька</b>."
         }
       ],
       "Створення посилань та кнопок": [
