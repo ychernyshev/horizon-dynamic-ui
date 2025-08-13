@@ -186,18 +186,26 @@
       "Налаштування сцени/компоненту у RegistryLayoutScheme": [
         {
           "type": "text",
-          "content": "Макет, що тримає реєстр компонентів"
+          "content": "<b>RegistryLayoutScheme.js</b> являє собою об'єкт, що містить, відповідні статичні ключі, значення для котрих необхідно закладати у залежності від очікуваного результату. Для кожної сцени є вже визначений набір ключів, котрими керується <b>SceneManager</b> при створенні сцени. Розглянемо на прикладі <b>WelcomeScene</b>:"
         },
         {
           "type": "code",
           "language": "js",
-          "content": "RegistryLayoutScheme.register({ scene: WelcomeScene });"
+          "content": "export const RegistryLayoutScheme = {\n    welcome_view: {\n        primary_structure: `\n                < main>\n                  < section id=\"welcome-block\">< /section>\n                < /main>\n            `,\n        layout: [\n            \"WelcomeView\", \"QuickDocs\", \"CodeBlock\",\n            \"ExamplesList\", \"AddEntry\", \"EntriesList\",\n            \"EditEntry\", \"Footer\",\n        ],\n        config: {\n            WelcomeView: {\n                title: \"Horizon Dynamic UI\",\n                subtitle: \"Your scene-driven front-end engine\",\n                version: \"v0.9.0 Beta\",\n                tagline: \"Pure JS. No build. Host-ready.\",\n                CTA: {label: \"Get Started with Horizon\", link: \"#guide\"},\n            },\n            QuickDocs: {\n                links: [\n                    {label: \"\uD83D\uDCD8 What is Horizon?\", href: \"#guide\"},\n                    {label: \"\uD83D\uDE80 Creating Your First Scene\", href: \"#first-scene\"},\n                    {label: \"\uD83E\uDDE9 Component Structure\", href: \"#components\"}\n                ]\n            },\n            CodeBlock: {\n                codeSnippets: {\n                    example_js: {\n                        title: 'example_js',\n                        language: \"js\",\n                        content: `const msg = \"Hello Horizon\";`\n                    },\n                    example_html: {\n                        title: 'example_html',\n                        language: \"html\",\n                        content: `<div id=\"app\"></div>`\n                    }\n                }\n            },\n        },\n        linkHref: [\"https://unpkg.com/prismjs/themes/prism.css\"],\n        scriptSrc: [\"https://unpkg.com/prismjs/prism.js\", \"https://unpkg.com/prismjs/components/prism-javascript.min.js\"],\n    }\n}"
+        },
+        {
+          "type": "text",
+          "content": "Особливості роботи <b>DUI</b> вимагають обов'язкове вказання контейнера компонента, у котрий буде змонтовантований вміст контейнеру. На прикладі <b>Vue.js</b> або <b>React.js</b> - це <code><b>div id=\"app\"</b></code>, у котрий монтується кожний новий компонент. Під час розробки <b>DUI</b>, ідеєю стало позбавитися зайвого <code><b>div</b></code>, що призвело до рішення відправною точкою для монтування залишити <code><b>body id=\"app\"</b></code>. Це дозволяє кожній окремій сцені монтувати у <code><b>body</b></code> своє, незалежне, <b>DOM</b>-дерево та свої, унікальні, залежності, не перевантажуючи імпортами та можливою логікою один централізований компонент, котра буде не витребувана в усіх інших випадках, окрім роботи із конкретною сценою. Для реалізації подібної структури необхідні два елемента, які доречно назвати конфігураційними. Вони належать до <b>Template Composition Engine</b> - частини ядра <b>Horizon Dynamic UI</b>, що займаються збіркою, налаштуванням та монтуванням сцени: <ul><li><b>RegistryLayoutScheme</b> необхідний для створення конфігурації сцени, згідно котрої вона буде створена.</li><li><b>LayoutRegistryComponents</b> необхідний для створення каталогу компонентів, котрі будуть доступні у застосунку для візуалізації.</li></ul>"
+        },
+        {
+          "type": "text",
+          "content": "<b>RegistryLayoutScheme</b> використовує спеціальні ключі:<ul><li><b>primary_structure</b> - де створюється \"main\" контейнер для відображення сцени</li><li><b>layout</b> - це масив, в котрий записуються усі компоненти, що мають бути доступні на сцені</li><li><b>config</b> - використовується для створення масиву даних, що \"з коробки\" доступні на сцені. Це може бути <b>title</b> сторінки, <b>meta</b>-заголовки, списки чогось, наприклад, кнопок. Власне, усе те, що знадобиться на сцені під час її створення. Так можна передати дані з <b>config</b> до сцени чи кожного компоненту, підключеного до сцени через <b>layout</b> </li><li><b>linkHref</b> - дозволяє кожній сцені мати свої, ізольовані від інших сцен, файли стилів</li><li><b>scriptSrc</b> - дозволяє кожній сцені мати свої, ізольовані від інших сцен, файли скриптів, наприклад, сторонніх бібліотек</li></ul>"
         }
       ],
       "Реєстрація сцени/компоненту у LayoutRegistryComponents": [
         {
           "type": "text",
-          "content": "Реєстр схем макетів"
+          "content": "<b>LayoutRegistryComponents</b> необхідний для створення каталогу компонентів, котрі будуть доступні у застосунку для візуалізації. Усі інші компоненти, котрі, якщо, навіть, й сконфігуровані, не будуть відображені, якщо не будуть занесені у цей файл. По своїй суті, у цьому файлі заносяться усі імпорти компонентів, які зчитує <b>SceneManager</b> та робить доступними у всьому застосунку. Це позбавляє необхідності робити імпорт компоненту у конкретній сцені, або, порушувати <b>DRY</b> повторюючи цей імпорт у іншій."
         },
         {
           "type": "code",
