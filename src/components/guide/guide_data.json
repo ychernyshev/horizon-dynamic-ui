@@ -205,12 +205,25 @@
       "Реєстрація сцени/компоненту у LayoutRegistryComponents": [
         {
           "type": "text",
-          "content": "<b>LayoutRegistryComponents</b> необхідний для створення каталогу компонентів, котрі будуть доступні у застосунку для візуалізації. Усі інші компоненти, котрі, якщо, навіть, й сконфігуровані, не будуть відображені, якщо не будуть занесені у цей файл. По своїй суті, у цьому файлі заносяться усі імпорти компонентів, які зчитує <b>SceneManager</b> та робить доступними у всьому застосунку. Це позбавляє необхідності робити імпорт компоненту у конкретній сцені, або, порушувати <b>DRY</b> повторюючи цей імпорт у іншій."
+          "content": "<b>LayoutRegistryComponents</b> необхідний для створення каталогу компонентів, котрі будуть доступні у застосунку для візуалізації. Усі інші компоненти, котрі, якщо, навіть, й сконфігуровані, не будуть відображені, якщо не будуть занесені у цей файл. По своїй суті, у цьому файлі зберігаються усі імпорти компонентів, які зчитує <b>SceneManager</b> та робить їх доступними по всьому застосунку. Це позбавляє необхідності робити імпорт компоненту у конкретній сцені, або, порушувати <b>DRY</b> повторюючи цей імпорт у іншій."
+        },
+        {
+          "type": "text",
+          "content": "Для поточної версії <b>DUI</b>, <b>LayoutRegistryComponents</b> виглядає наступним чином:"
         },
         {
           "type": "code",
           "language": "js",
-          "content": "LayoutRegistryComponents.add('welcome', WelcomeScene);"
+          "content": "// Pages\nimport { Page_404_View } from \"../../pages/reports/Page_404_View.js\";\nimport { WelcomeScene } from \"../../pages/WelcomeScene.js\";\n\n// Components\nimport { QuickDocs } from \"../../pages/guide/QuickDocs.js\";\nimport { CodeBlock } from \"../../components/CodeBlock.js\";\nimport { ExamplesList } from \"../../components/ExamplesList.js\";\nimport { AddEntry } from \"../../components/entry/AddEntry.js\";\nimport { EntriesList } from \"../../components/entry/EntriesList.js\";\nimport { EditEntry } from \"../../components/entry/EditEntry.js\";\nimport { Footer } from \"../../components/Footer.js\";\n\n// Guide\nimport { GuideMain } from \"../../pages/guide/GuideMain.js\";\nimport { GuideNavigation } from \"../../components/guide/GuideNavigation.js\";\nimport { GuideMenuItem } from \"../../components/guide/GuideMenuItem.js\";\nimport { GuideDescription } from \"../../components/guide/GuideDescription.js\";\n\nexport class LayoutRegistryComponents {\n    static\n    ComponentMap = Object.freeze({\n        // sceneName\n        Page404: Page_404_View,\n        WelcomeView: WelcomeScene,\n        // componentName\n        QuickDocs,\n        CodeBlock,\n        ExamplesList,\n        AddEntry,\n        EntriesList,\n        EditEntry,\n        Footer,\n        // Guide\n        GuideMain,\n        GuideNavigation,\n        GuideMenuItem,\n        GuideDescription,\n    });\n}"
+        },
+        {
+          "type": "text",
+          "content": "Така схема дозволяє спростити додавання, видалення або перенесення компоненту до іншої сцени без необхідності у кожній окремій сцені робити чи видаляти імпорти цього компоненту. Достатньо додати чи прибрати компонент з <b>layout</b> конкретної сцени у <b>RegistryLayoutScheme</b>."
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "layout: [\n            \"WelcomeView\", \"QuickDocs\", \"CodeBlock\",\n            \"ExamplesList\", \"AddEntry\", \"EntriesList\",\n            \"EditEntry\", \"Footer\",\n        ]"
         }
       ],
       "Прив'язування стилів та скриптів": [
