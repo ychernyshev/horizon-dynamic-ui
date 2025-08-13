@@ -149,7 +149,7 @@
         {
           "type": "code",
           "language": "js",
-          "content": "welcome_view: {\n        primary_structure: `\n                < main>\n                  < section id=\"welcome-block\"></section>\n                < /main>\n            `,\n        layout: [\n            \"WelcomeView\", \"QuickDocs\", \"CodeBlock\",\n            \"ExamplesList\", \"AddEntry\", \"EntriesList\",\n            \"EditEntry\", \"Footer\",\n        ],\n        config: {\n            WelcomeView: {\n                title: \"Horizon Dynamic UI\",\n                subtitle: \"Your scene-driven front-end engine\",\n                version: \"v0.9.0 Beta\",\n                tagline: \"Pure JS. No build. Host-ready.\",\n                CTA: {label: \"Get Started with Horizon\", link: \"#guide\"},\n            },\n            QuickDocs: {\n                links: [\n                    {label: \"\uD83D\uDCD8 What is Horizon?\", href: \"#guide\"},\n                    {label: \"\uD83D\uDE80 Creating Your First Scene\", href: \"#first-scene\"},\n                    {label: \"\uD83E\uDDE9 Component Structure\", href: \"#components\"}\n                ]\n            },\n            CodeBlock: {\n                codeSnippets: {\n                    example_js: {\n                        title: 'example_js',\n                        language: \"js\",\n                        content: `const msg = \"Hello Horizon\";`\n                    },\n                    example_html: {\n                        title: 'example_html',\n                        language: \"html\",\n                        content: `<div id=\"app\"></div>`\n                    }\n                }\n            },\n        },\n        linkHref: [\"https://unpkg.com/prismjs/themes/prism.css\"],\n        scriptSrc: [\"https://unpkg.com/prismjs/prism.js\", \"https://unpkg.com/prismjs/components/prism-javascript.min.js\"],\n    }"
+          "content": "welcome_view: {\n        primary_structure: `\n                < main>\n                  < section id=\"welcome-block\"></section>\n                < /main>\n            `,\n        layout: [\n            \"WelcomeView\", \"QuickDocs\", \"CodeBlock\",\n            \"ExamplesList\", \"AddEntry\", \"EntriesList\",\n            \"EditEntry\", \"Footer\",\n        ],\n        config: {\n            WelcomeView: {\n                title: \"Horizon Dynamic UI\",\n                subtitle: \"Your scene-driven front-end engine\",\n                version: \"v0.1.19 Beta\",\n                tagline: \"Pure JS. No build. Host-ready.\",\n                CTA: {label: \"Get Started with Horizon\", link: \"#guide\"},\n            },\n            QuickDocs: {\n                links: [\n                    {label: \"\uD83D\uDCD8 What is Horizon?\", href: \"#guide\"},\n                    {label: \"\uD83D\uDE80 Creating Your First Scene\", href: \"#first-scene\"},\n                    {label: \"\uD83E\uDDE9 Component Structure\", href: \"#components\"}\n                ]\n            },\n            CodeBlock: {\n                codeSnippets: {\n                    example_js: {\n                        title: 'example_js',\n                        language: \"js\",\n                        content: `const msg = \"Hello Horizon\";`\n                    },\n                    example_html: {\n                        title: 'example_html',\n                        language: \"html\",\n                        content: `<div id=\"app\"></div>`\n                    }\n                }\n            },\n        },\n        linkHref: [\"https://unpkg.com/prismjs/themes/prism.css\"],\n        scriptSrc: [\"https://unpkg.com/prismjs/prism.js\", \"https://unpkg.com/prismjs/components/prism-javascript.min.js\"],\n    }"
         },
         {
         "type": "text",
@@ -191,7 +191,7 @@
         {
           "type": "code",
           "language": "js",
-          "content": "export const RegistryLayoutScheme = {\n    welcome_view: {\n        primary_structure: `\n                < main>\n                  < section id=\"welcome-block\">< /section>\n                < /main>\n            `,\n        layout: [\n            \"WelcomeView\", \"QuickDocs\", \"CodeBlock\",\n            \"ExamplesList\", \"AddEntry\", \"EntriesList\",\n            \"EditEntry\", \"Footer\",\n        ],\n        config: {\n            WelcomeView: {\n                title: \"Horizon Dynamic UI\",\n                subtitle: \"Your scene-driven front-end engine\",\n                version: \"v0.9.0 Beta\",\n                tagline: \"Pure JS. No build. Host-ready.\",\n                CTA: {label: \"Get Started with Horizon\", link: \"#guide\"},\n            },\n            QuickDocs: {\n                links: [\n                    {label: \"\uD83D\uDCD8 What is Horizon?\", href: \"#guide\"},\n                    {label: \"\uD83D\uDE80 Creating Your First Scene\", href: \"#first-scene\"},\n                    {label: \"\uD83E\uDDE9 Component Structure\", href: \"#components\"}\n                ]\n            },\n            CodeBlock: {\n                codeSnippets: {\n                    example_js: {\n                        title: 'example_js',\n                        language: \"js\",\n                        content: `const msg = \"Hello Horizon\";`\n                    },\n                    example_html: {\n                        title: 'example_html',\n                        language: \"html\",\n                        content: `<div id=\"app\"></div>`\n                    }\n                }\n            },\n        },\n        linkHref: [\"https://unpkg.com/prismjs/themes/prism.css\"],\n        scriptSrc: [\"https://unpkg.com/prismjs/prism.js\", \"https://unpkg.com/prismjs/components/prism-javascript.min.js\"],\n    }\n}"
+          "content": "export const RegistryLayoutScheme = {\n    welcome_view: {\n        primary_structure: `\n                < main>\n                  < section id=\"welcome-block\">< /section>\n                < /main>\n            `,\n        layout: [\n            \"WelcomeView\", \"QuickDocs\", \"CodeBlock\",\n            \"ExamplesList\", \"AddEntry\", \"EntriesList\",\n            \"EditEntry\", \"Footer\",\n        ],\n        config: {\n            WelcomeView: {\n                title: \"Horizon Dynamic UI\",\n                subtitle: \"Your scene-driven front-end engine\",\n                version: \"v0.1.19 Beta\",\n                tagline: \"Pure JS. No build. Host-ready.\",\n                CTA: {label: \"Get Started with Horizon\", link: \"#guide\"},\n            },\n            QuickDocs: {\n                links: [\n                    {label: \"\uD83D\uDCD8 What is Horizon?\", href: \"#guide\"},\n                    {label: \"\uD83D\uDE80 Creating Your First Scene\", href: \"#first-scene\"},\n                    {label: \"\uD83E\uDDE9 Component Structure\", href: \"#components\"}\n                ]\n            },\n            CodeBlock: {\n                codeSnippets: {\n                    example_js: {\n                        title: 'example_js',\n                        language: \"js\",\n                        content: `const msg = \"Hello Horizon\";`\n                    },\n                    example_html: {\n                        title: 'example_html',\n                        language: \"html\",\n                        content: `<div id=\"app\"></div>`\n                    }\n                }\n            },\n        },\n        linkHref: [\"https://unpkg.com/prismjs/themes/prism.css\"],\n        scriptSrc: [\"https://unpkg.com/prismjs/prism.js\", \"https://unpkg.com/prismjs/components/prism-javascript.min.js\"],\n    }\n}"
         },
         {
           "type": "text",
@@ -244,7 +244,55 @@
       "Створення посилань та кнопок": [
         {
           "type": "text",
-          "content": "Створення посилань та кнопок"
+          "content": "Для роботи із посиланнями та кнопками у <b>Horizon Dynamic UI</b> доступний спектр інструментів. Кнопки та посилання можливо додати на сторінку трьома способами:<ul><li><b>ручне створення посилань та кнопок</b> - шляхом звичайного тегу <b>a</b> з <b>html</b></li><li><b>оголошення кнопок у межах mount() та виклик у шаблоні без необхідності дублювання коду</b>:</li></ul>"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "const CTA_label = config.CTA?.label || \"Explore\";\n    const CTA_link = config.CTA?.link?.trim() ? config.CTA.link : \"#page404\";\n\n    const processedConfig = {\n        ...config,\n        CTA_button: `< a href=\"${CTA_link}\" class=\"btn bg-gradient-info mt-3 fs-6\">\n             ${CTA_label}\n             < span class=\"badge\">${config.version}< /span>\n           < /a>`\n    };"
+        },
+        {
+          "type": "text",
+          "content": "Другий спосіб дозволяє створити одну кнопку/посилання, та додавати її у шаблон на будь-яке місце за допомогою <b>{CTA_button}</b>. Такий метод стає доречним у тих випадках, коли, у декількох місцях сторінки, необхідно відобразити однакову кнопку чи посилання. Наприклад у головному меню та футері, чи запрошуючи до реакції  на якусь пропозицію, у різних місцях сторінки, поки вона переглядається."
+        },
+        {
+          "type": "text",
+          "content": "Кнопка чи посилання додаються у блок <b>mount() {}</b> для її додавання у <b>DOM</b>-дерево під час його побудови. Так вона реалізована у <b>WelcomeScene</b>:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "mount(config = {}) {\n        const container = document.getElementById(\"welcome-block\");\n\n        if (!container) {\n            console.warn(\"[WelcomeScene] Container #welcome-block not found - component not mounted.\");\n            return;\n        }\n\n        const {title, subtitle, version, tagline, CTA} = config;\n\n        const CTA_label = config.CTA?.label || \"Explore\";\n        const CTA_link = config.CTA?.link?.trim() ? config.CTA.link : \"#page404\";\n\n        const processedConfig = {\n            ...config,\n            CTA_button: `< a href=\"${CTA_link}\" class=\"btn bg-gradient-info mt-3 fs-6\">\n                 ${CTA_label}\n                 < span class=\"badge\">${config.version}< /span>\n               < /a>`\n        };\n\n\n        container.innerHTML = renderTemplate(this.template, processedConfig);\n\n        if (typeof this.onMount === \"function\") {\n            this.onMount();\n        }\n    },"
+        },
+        {
+          "type": "text",
+          "content": "Спочатку запитуються дані з <b>RegistryLayoutScheme</b>, якщо такі були додані у <b>config</b> сцени. Як у даному випадку із <b>CTA</b>:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "config: {\n        WelcomeView: {\n                title: \"Horizon Dynamic UI\",\n                subtitle: \"Your scene-driven front-end engine\",\n                version: \"v0.1.19 Beta\",\n                tagline: \"Pure JS. No build. Host-ready.\",\n                CTA: {label: \"Get Started with Horizon\", link: \"#guide\"},\n            },"
+        },
+        {
+          "type": "text",
+          "content": "Наступним кроком створюється кнопка та згодом, монтується сцена."
+        },
+        {
+          "type": "text",
+          "content": "<ul><li><b>генерація посилань та кнопок за допомогою хелпера <b>useCTA</b>, у котрих необхідна особливо налаштована логіка події</b>:</li></ul>"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "const btn = useCTA({ label: \"Дізнатися більше\", link: \"/pricing\" }, \"v1.2\", {\n  target: \"_blank\",\n  className: \"btn btn-info\",\n  title: \"Перейти до тарифів\"\n});\ndocument.querySelector(\"#cta-holder\").appendChild(btn);"
+        },
+        {
+          "type": "text",
+          "content": "Такий підхід дозволяє, так би мовити, \"костимізувати\" кнопку чи посилання необхідним чином для конкретного випадку. Вказати тип - <b>кнопка</b> чи <b>посилання</b>, список класів <b>CSS</b>-стилів, <b>id</b>, <b>title</b> та інші параметри хелпера <b>useCTA</b>."
+        },
+        {
+          "type": "text",
+          "content": "Кнопка чи посилання додаються у блок <b>mount() {}</b> для її додавання у <b>DOM</b>-дерево під час його побудови."
         }
       ],
       "Виклик messages": [

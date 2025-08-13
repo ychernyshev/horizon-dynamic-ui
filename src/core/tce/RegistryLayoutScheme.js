@@ -38,7 +38,7 @@ export const RegistryLayoutScheme = {
             WelcomeView: {
                 title: "Horizon Dynamic UI",
                 subtitle: "Your scene-driven front-end engine",
-                version: "v0.9.0 Beta",
+                version: "v0.1.19 Beta",
                 tagline: "Pure JS. No build. Host-ready.",
                 CTA: {label: "Get Started with Horizon", link: "#guide"},
             },
