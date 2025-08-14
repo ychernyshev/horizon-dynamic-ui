@@ -298,7 +298,25 @@
       "Виклик messages": [
         {
           "type": "text",
-          "content": "Виклик messages"
+          "content": "Сповіщення - це один з найвикористованіших компонентів будь-якого фреймворку, що дозволяють демонструвати сповіщення щодо результату виконання дій у застосунку, такі, як: \"<b>успіх</b>\", \"<b>помилку виконання</b>\", \"<b>попередження</b>\", \"<b>інформативне сповіщення</b>\". Використання системи  повідомлень у <b>DUI</b> відбувається шляхом залучення до цієї дії хелперу <b>useMessages</b>, що дозволяє викликати відповідні повідомлення згідно представленого списку:<ul><li><b>success</b></li><li><b>warning</b></li><li><b>error</b></li><li><b>info</b></li></ul> "
+        },
+        {
+          "type": "text",
+          "content": "Підключення показу повідомлення відбувається за допомогою імпорту <b>useMessages</b>:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "import {useMessages} from \"../../core/helpers/useMessages.js\";"
+        },
+        {
+          "type": "text",
+          "content": "Подальше використання повідомлень відбувається вже після створення <b>DOM</b> з <b>onMunt() {}</b> секції:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "export const AddEntry = {\n    template: ``,\n    mount(config = {}) {},\n    onMount() {\n        const messages = useMessages();\n        messages.success(\"add entry\");\n        \n        messages.error(\"error\");\n        \n        messages.warning(\"warning\");\n        \n        messages.info(\"info\");\n    }\n}"
         }
       ],
       "Блок коду": [
