@@ -318,12 +318,6 @@
           "language": "js",
           "content": "export const AddEntry = {\n    template: ``,\n    mount(config = {}) {},\n    onMount() {\n        const messages = useMessages();\n        messages.success(\"add entry\");\n        \n        messages.error(\"error\");\n        \n        messages.warning(\"warning\");\n        \n        messages.info(\"info\");\n    }\n}"
         }
-      ],
-      "Блок коду": [
-        {
-          "type": "text",
-          "content": "Блок коду"
-        }
       ]
     },
     "Глибше занурення у компоненти": {
@@ -433,7 +427,7 @@
       "useHighlight": [
         {
           "type": "text",
-          "content": "useHighlight"
+          "content": "Блок коду"
         }
       ],
       "useLocalStorage": [
