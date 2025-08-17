@@ -363,7 +363,11 @@
       "Робота з Dispatcher": [
         {
           "type": "text",
-          "content": "Робота з Dispatcher"
+          "content": "<div class=\"row\">\n<div class=\"col-xl-10\"><section id=\"add-entry\"></section><div class=\"col-xl-6\"><div class=\"row\"><div class=\"col-xl-10\">\n<section id=\"edit-entry\"></section></div><div class=\"col-xl-2\" style=\"display: none\"><ul id=\"entries-list\"></ul></div></div><section id=\"edit-entry\"></section></div>"
+        },
+        {
+          "type": "text",
+          "content": "<div class=\"col-xl-2\" style=\"display: none\"><ul id=\"entries-list\"></ul></div>"
         }
       ],
       "SceneMount": [

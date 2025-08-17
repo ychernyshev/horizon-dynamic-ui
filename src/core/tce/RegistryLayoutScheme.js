@@ -9,10 +9,12 @@ export const RegistryLayoutScheme = {
     guide: {
         primary_structure: `
             <div class="container" id="guide-container"></div>
+            <div class="container" id="entries-list"></div>
+            <div class="container" id="edit-entry"></div>
         `,
         layout: [
             "GuideMain", "GuideNavigation", "GuideMenuItem", "GuideDescription",
-            "CodeBlock",
+            "CodeBlock", "AddEntry", "EntriesList", "EditEntry"
         ],
         config: {
             GuideMain: {

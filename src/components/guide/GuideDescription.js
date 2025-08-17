@@ -1,22 +1,28 @@
 import { renderTemplate } from "../../core/helpers/renderTemplate.js";
+import {SceneDispatcher} from "../../core/dispatcher/SceneDispatcher.js";
+import {dispatcher} from "../../core/helpers/useDispatcher.js";
+import {AddEntry} from "../entry/AddEntry.js";
 
 export const GuideDescription = {
   template: `
     <section id="code-block"></section>
+    <section id="add-entry"></section>
   `,
 
-  mount(config = {}) {
+  async mount(config = {}) {
     const container = document.getElementById("guide-description");
     if (!container) {
       console.warn("[GuideDescription] Container #guide-description not found - component not mounted.");
       return;
     }
-    
+
     container.innerHTML = renderTemplate(this.template, config);
-    this.onMount();
+
+    // this.onMount();
+    await this.loadGuide();
   },
 
-  onMount() {
+  async loadGuide() {
     document.addEventListener("click", async (e) => {
       const target = e.target.closest("[data-topic]");
       if (!target) return;
@@ -67,9 +73,40 @@ export const GuideDescription = {
 
         descContainer.innerHTML = html;
 
+        // 🔥 ВАЖЛИВО: викликаємо логіку після вставки
+        this.afterGuideMount();
+
       } catch (error) {
         console.error("[Guide] Error loading guide_data.json:", error);
       }
     });
   },
+
+  afterGuideMount() {
+    const addEntryContainer = document.getElementById("add-entry");
+    if (addEntryContainer) {
+      AddEntry.mount(); // монтує компонент у контейнер
+    }
+
+    const STORAGE_KEY = "notes";
+
+    SceneDispatcher.subscribe("add-entry/save", payload => {
+      const notes = dispatcher.get(STORAGE_KEY) || [];
+
+      const newEntry = typeof payload === "string"
+          ? {id: Date.now(), text: payload, timestamp: new Date().toISOString()}
+          : {
+            id: Date.now(),
+            text: payload.text,
+            timestamp: new Date().toISOString()
+          };
+
+      const updatedNotes = [...notes, newEntry];
+
+      console.log("[Debug] Notes before saving:", updatedNotes);
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedNotes));
+      dispatcher.set(STORAGE_KEY, updatedNotes);
+    });
+  }
 }
