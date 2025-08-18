@@ -320,30 +320,20 @@
         }
       ]
     },
-    "Глибше занурення у компоненти": {
-      "config": [
-        {
-          "type": "code",
-          "language": "js",
-          "content": "const {title} = config;"
-        },
-        {
-          "type": "code",
-          "language": "js",
-          "content": "const {codeSnippets = {}} = params;"
-        },
-        {
-          "type": "code",
-          "language": "js",
-          "content": "this.onMount(config);"
-        }
-      ]
-    },
     "Роутинг": {
       "Хеш-посилання": [
         {
           "type": "text",
-          "content": "Хеш-посилання"
+          "content": "Хеш-посилання є найпростішим методом адресування усередині <b>Horizon Dynamic UI</b> між його частинами. Для використання таких посилань, достатньо створити відповідний роут у <code>router -> index.js</code>. Наприклад:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "export function init(app) {\n    app.routing.add(\"page_404\", () => {\n        app.sceneManager.mountScene(\"page_404\");\n    });\n    Інший код...\n}"
+        },
+        {
+          "type": "text",
+          "content": "У шаблоні використати тег <b>a</b>: <code>< a href=\"#page_404\">Page 404< /a></code>"
         }
       ],
       "Створення {CTA_button}": [
@@ -380,12 +370,6 @@
         {
           "type": "text",
           "content": "Кроки підключення функціоналу: <ul><li>Підключення компоненту до RegistryLayoutScheme.js: <code>layout: [\"AddEntry\", \"EntriesList\", \"EditEntry\"]</code></li><li>Підключення імпортів у компоненті: <code>import {AddEntry} from \"../entry/AddEntry.js\";\nimport {EntriesList} from \"../entry/EntriesList.js\";\nimport {EditEntry} from \"../entry/EditEntry.js\";</code</li><li>Монтування компоненту у контейнер: <code>const addEntryContainer = document.getElementById(\"add-entry\");\n        if (addEntryContainer) {\n            AddEntry.mount();\n        }\n        const entriesListContainer = document.getElementById(\"entries-list\");\n        if (entriesListContainer) {\n            EntriesList.mount();\n        }\n        const editEntryContainer = document.getElementById(\"edit-entry\");\n        if (editEntryContainer) {\n            EditEntry.mount();\n        }</code></li><li>Для зьереження запису у localStorage: <code>const STORAGE_KEY = \"notes\";\n\n        SceneDispatcher.subscribe(\"add-entry/save\", payload => {\n            const notes = dispatcher.get(STORAGE_KEY) || [];\n\n            const newEntry = typeof payload === \"string\"\n                ? {id: Date.now(), text: payload, timestamp: new Date().toISOString()}\n                : {\n                    id: Date.now(),\n                    text: payload.text,\n                    timestamp: new Date().toISOString()\n                };\n\n            const updatedNotes = [...notes, newEntry];\n\n            console.log(\"[Debug] Notes before saving:\", updatedNotes);\n\n            localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedNotes));\n            dispatcher.set(STORAGE_KEY, updatedNotes);\n        });</code></li><li>Додавання форми у шаблон: <code>< div class=\"row\">< div class=\"col-xl-10\">< section id=\"add-entry\">< /section>< div class=\"col-xl-6\">< div class=\"row\"><div class=\"col-xl-10\">< section id=\"edit-entry\">< /section>< /div>< div class=\"col-xl-2\" style=\"display: none\">< ul id=\"entries-list\">< /ul>< /div>< /div><section id=\"edit-entry\">< /section></code></li><li></li></ul>"
-        }
-      ],
-      "SceneMount": [
-        {
-          "type": "text",
-          "content": "SceneMount"
         }
       ],
       "MessagesAgent": [
