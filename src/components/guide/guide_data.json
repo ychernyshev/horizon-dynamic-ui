@@ -393,7 +393,37 @@
       "Використання useCTA() хелпера": [
         {
           "type": "text",
-          "content": "Використання useCTA() хелпера"
+          "content": "Використання useCTA() хелпера дозволяє не просто генерувати сам тег, але й передавати у кнопку чи посилання конкретні параметри. Виклик кнопки у <b>mount() {}</b> виглядає наступним чином:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "useCTA({ label: \"Дізнатися більше\", link: \"/pricing\" }, \"v1.2\", {\n  className: \"btn btn-info\",\n  target: \"_blank\",\n  title: \"Перейти на сторінку\"\n});"
+        },
+        {
+          "type": "text",
+          "content": "або"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "useCTA({ label: \"Натисни мене\" }, \"v1.2\", {\n  elementType: \"button\",\n  className: \"btn btn-success\",\n  onClick: () => showModal()\n});"
+        },
+        {
+          "type": "text",
+          "content": "Це відрізняє кнопку CTA оголошену у mount() {} \"вручну\" від згенерованої за допомогою хелперу <b>useCTA</b>. Варіант із <b>useCTA</b> створює умови для додавання кнопці інтерактивності. Згенерована кнопка через <b>useCTA</b> приймає події, нею можна гнучко керувати."
+        },
+        {
+          "type": "text",
+          "content": "Кнопка додається у шаблон, як дочірній елемент: <code>document.getElementById(\"cta-container\").appendChild(button);</code>."
+        },
+        {
+          "type": "text",
+          "content": "Згенерована кнопка приймає наступні параметри:<ul><li><code>elementType = href ? \"a\" : \"button\"</code></li><li><code>target</code></li><li><code>className</code></li><li><code>id</code></li><li><code>rel</code></li><li><code>ariaLabel</code></li>li><code>title</code></li>li><code>onClick</code></li></ul>"
+        },
+        {
+          "type": "text",
+          "content": "Попередньо, хелпер має бути імпортований у компонент: <code>import {use_cta} from \"../core/helpers/useCTA.js\";</code>"
         }
       ]
     },
