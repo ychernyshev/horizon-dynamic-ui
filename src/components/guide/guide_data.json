@@ -379,7 +379,7 @@
         },
         {
           "type": "text",
-          "content": "Кроки підключення функціоналу: <ul><li>Підключення компоненту до RegistryLayoutScheme.js: <code>layout: [\"AddEntry\", \"EntriesList\", \"EditEntry\"]</code></li><li>Підключення імпортів у компоненті: <code>import {AddEntry} from \"../entry/AddEntry.js\";\nimport {EntriesList} from \"../entry/EntriesList.js\";\nimport {EditEntry} from \"../entry/EditEntry.js\";</code</li><li>Монтування компоненту у контейнер: <code>const addEntryContainer = document.getElementById(\"add-entry\");\n        if (addEntryContainer) {\n            AddEntry.mount();\n        }\n        const entriesListContainer = document.getElementById(\"entries-list\");\n        if (entriesListContainer) {\n            EntriesList.mount();\n        }\n        const editEntryContainer = document.getElementById(\"edit-entry\");\n        if (editEntryContainer) {\n            EditEntry.mount();\n        }</code></li><li>Для зьереження запису у localStorage: <code>const STORAGE_KEY = \"notes\";\n\n        SceneDispatcher.subscribe(\"add-entry/save\", payload => {\n            const notes = dispatcher.get(STORAGE_KEY) || [];\n\n            const newEntry = typeof payload === \"string\"\n                ? {id: Date.now(), text: payload, timestamp: new Date().toISOString()}\n                : {\n                    id: Date.now(),\n                    text: payload.text,\n                    timestamp: new Date().toISOString()\n                };\n\n            const updatedNotes = [...notes, newEntry];\n\n            console.log(\"[Debug] Notes before saving:\", updatedNotes);\n\n            localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedNotes));\n            dispatcher.set(STORAGE_KEY, updatedNotes);\n        });</code></li><li>Додавання форми у шаблон: <code>< div class=\"row\">< div class=\"col-xl-10\">< section id=\"add-entry\">< /section>< div class=\"col-xl-6\">< div class=\"row\"><div class=\"col-xl-10\">< section id=\"edit-entry\">< /section>< /div>< div class=\"col-xl-2\" style=\"display: none\">< ul id=\"entries-list\">< /ul>< /div>< /div><section id=\"edit-entry\">< /section></code></li><li></li></uk>"
+          "content": "Кроки підключення функціоналу: <ul><li>Підключення компоненту до RegistryLayoutScheme.js: <code>layout: [\"AddEntry\", \"EntriesList\", \"EditEntry\"]</code></li><li>Підключення імпортів у компоненті: <code>import {AddEntry} from \"../entry/AddEntry.js\";\nimport {EntriesList} from \"../entry/EntriesList.js\";\nimport {EditEntry} from \"../entry/EditEntry.js\";</code</li><li>Монтування компоненту у контейнер: <code>const addEntryContainer = document.getElementById(\"add-entry\");\n        if (addEntryContainer) {\n            AddEntry.mount();\n        }\n        const entriesListContainer = document.getElementById(\"entries-list\");\n        if (entriesListContainer) {\n            EntriesList.mount();\n        }\n        const editEntryContainer = document.getElementById(\"edit-entry\");\n        if (editEntryContainer) {\n            EditEntry.mount();\n        }</code></li><li>Для зьереження запису у localStorage: <code>const STORAGE_KEY = \"notes\";\n\n        SceneDispatcher.subscribe(\"add-entry/save\", payload => {\n            const notes = dispatcher.get(STORAGE_KEY) || [];\n\n            const newEntry = typeof payload === \"string\"\n                ? {id: Date.now(), text: payload, timestamp: new Date().toISOString()}\n                : {\n                    id: Date.now(),\n                    text: payload.text,\n                    timestamp: new Date().toISOString()\n                };\n\n            const updatedNotes = [...notes, newEntry];\n\n            console.log(\"[Debug] Notes before saving:\", updatedNotes);\n\n            localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedNotes));\n            dispatcher.set(STORAGE_KEY, updatedNotes);\n        });</code></li><li>Додавання форми у шаблон: <code>< div class=\"row\">< div class=\"col-xl-10\">< section id=\"add-entry\">< /section>< div class=\"col-xl-6\">< div class=\"row\"><div class=\"col-xl-10\">< section id=\"edit-entry\">< /section>< /div>< div class=\"col-xl-2\" style=\"display: none\">< ul id=\"entries-list\">< /ul>< /div>< /div><section id=\"edit-entry\">< /section></code></li><li></li></ul>"
         }
       ],
       "SceneMount": [
@@ -391,7 +391,19 @@
       "MessagesAgent": [
         {
           "type": "text",
-          "content": "MessagesAgent"
+          "content": "<b>DUI</b>, як фреймворк для створення динамічних шаблонів, надає можливість задіювати чи не одну з найголовніших служб, що дозволяє повідомляти користувача про будь-які події."
+        },
+        {
+          "type": "text",
+          "content": "Якщо використовувати показ повідомлень тільки для оновлення записів у localStorage, то достатньо просто викликати у потрібному місці шаблону відповідний контейнер: <code>< div id=\"horizon-messages\">< /div></code>. Усе інше зробить <b>DUI</b>."
+        },
+        {
+          "type": "text",
+          "content": "Якщо необхідно використати <b>messages</b> за потрібної ситуації, тоді необхідно:<ul><li>імпортувати хелпер до компоненту: <code>import {useMessages} from \"../../core/helpers/useMessages.js\";</code></li><li>Створити екземпляр класу MessagesAgent через хелпер useMassages<code>const messages = useMessages();\n            messages.success(\"saved\");</code></li></ul>"
+        },
+        {
+          "type": "text",
+          "content": "Доступні такі типи повідомлень:<ul><li>success</li><li>info</li><li>warning</li><li>error</li></ul>"
         }
       ]
     },

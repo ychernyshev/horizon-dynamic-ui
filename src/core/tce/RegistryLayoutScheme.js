@@ -12,6 +12,7 @@ export const RegistryLayoutScheme = {
             <div class="container" id="entries-list" style="display: none"></div>
             <div class="container" id="edit-entry" style="display: none;"></div>
             <div class="container" id="add-entry" style="display: none;"></div>
+            <div id="horizon-messages" style="display: none"></div>
         `,
         layout: [
             "GuideMain", "GuideNavigation", "GuideMenuItem", "GuideDescription",
