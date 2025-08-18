@@ -339,7 +339,55 @@
       "Створення {CTA_button}": [
         {
           "type": "text",
-          "content": "Створення {CTA_button}"
+          "content": "<b>CTA</b> (Call To Action) є більш просунутим рішенням для створення кнопок та посилань, ніж <b>хеш-посилання</b>. Цей метод зручніший за хеш-посилання у тих випадках, коли, до прикладу, потрібні ідентичні кнопки у різних місцях сторінки. Це дозволяє уникнути дублювання коду та порушення принципу <b>DRY</b> (Don`t Repeat Yourself). До прикладу, у меню, що можуть мати однакові посилання у Header та Footer, і т.д. Кнопка <b>CTA</b> створюються безпосередньо у <b>js</b> коді, в секції <b>mount(){}</b>, яка й займається монтуванням компоненту у DOM-дерево. Виклик екземпляру кнопки відбувається у потрібних місцях шаблону <b>HTML</b> шляхом додавання <code>{CTA_button}</code>. Назва цієї інтерполяції (заміни коду) у js може бути довільною, не тільки <b>CTA_button</b>."
+        },
+        {
+          "type": "text",
+          "content": "Створення кнопки <b>CTA</b> відбувається наступним чином. Для більшої динаміки створити <code>const CTA_label</code> та <code>const CTA_link</code>. Це дозволить з <b>js</b> генерувати <b>CTA</b> або керувати цими даними <b>label</b> або <b>link</b>. Тоді потрібно буде змінити тип змінної на <b>let</b>."
+        },
+        {
+          "type": "text",
+          "content": "У базовому шаблоні <b>DUI</b> використовується <b>CTA</b> із перевіркою, чи <b>label</b> має значення, інакше підставляє значення за замовченням, а також, чи є значення в <b>link</b>, інакше підставляє хеш-посилання на сторінку 404. Виглядає це наступним чином:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "const CTA_label = config.CTA?.label || \"Explore\";\nconst CTA_link = config.CTA?.link?.trim() ? config.CTA.link : \"#page404\";"
+        },
+        {
+          "type": "text",
+          "content": "На основі цих даних генерується сама кнопка чи посилання із підстановкою необхідних даних з <b>label</b> та <b>link</b>:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "const processedConfig = {\n            ...config,\n            CTA_button: `< a href=\"${CTA_link}\" class=\"btn bg-gradient-info mt-3 fs-6\">\n                 ${CTA_label}\n                 < span class=\"badge\">${config.version}< /span>\n               < /a>`\n        };"
+        },
+        {
+          "type": "text",
+          "content": "Використання <b>CTA</b> дозволяє: <ul><li>централізовано керувати CTA через config (<code>RegistryLayoutScheme.js</code> -> <code>config</code> -> <code>mount() {}</code> компоненту)</li></ul>"
+        },
+        {
+          "type": "text",
+          "content": "<b>RegistryLayoutScheme.js:</b>"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "welcome_view: {\n        primary_structure: `...`,\n        layout: [...],\n        config: {\n            WelcomeView: {\n                ...\n                CTA: {label: \"Get Started with Horizon\", link: \"#guide\"},\n            },"
+        },
+        {
+          "type": "text",
+          "content": "<b>mount() {}</b> компоненту:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "const {title, subtitle, version, tagline, CTA} = config;\n\n        const CTA_label = config.CTA?.label || \"Explore\";\n        const CTA_link = config.CTA?.link?.trim() ? config.CTA.link : \"#page404\";\n\n        const processedConfig = {\n            ...config,\n            CTA_button: `< a href=\"${CTA_link}\" class=\"btn bg-gradient-info mt-3 fs-6\">\n                 ${CTA_label}\n                 < span class=\"badge\">${config.version}< /span>\n               < /a>`\n        };"
+        },
+        {
+          "type": "text",
+          "content": "<ul><li>легко змінювати поведінку кнопки без переписування HTML</li><li>підтримувати гнучкість і масштабованість (наприклад, для різних сцен або компонентів).</li></ul>"
         }
       ],
       "Використання useCTA() хелпера": [
