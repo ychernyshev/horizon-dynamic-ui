@@ -9,8 +9,9 @@ export const RegistryLayoutScheme = {
     guide: {
         primary_structure: `
             <div class="container" id="guide-container"></div>
-            <div class="container" id="entries-list"></div>
-            <div class="container" id="edit-entry"></div>
+            <div class="container" id="entries-list" style="display: none"></div>
+            <div class="container" id="edit-entry" style="display: none;"></div>
+            <div class="container" id="add-entry" style="display: none;"></div>
         `,
         layout: [
             "GuideMain", "GuideNavigation", "GuideMenuItem", "GuideDescription",

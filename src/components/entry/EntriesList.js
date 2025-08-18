@@ -5,6 +5,11 @@ export const EntriesList = {
     mount(config = {}) {
         const container = document.getElementById("entries-list");
 
+        if (!container) {
+            console.warn("[EntriesList] #entries-list not found during mount.");
+            return;
+        }
+
         container.innerHTML = renderTemplate(this.template, config);
 
         this.onMount(config);
@@ -15,6 +20,12 @@ export const EntriesList = {
         }
             }) {
         const ul = document.getElementById("entries-list");
+
+        if (!ul) {
+            console.warn("[EntriesList] #entries-list not found during onMount.");
+            return;
+        }
+
         ul.innerHTML = "";
 
         entries.forEach(entry => {
