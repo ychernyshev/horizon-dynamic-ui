@@ -419,7 +419,7 @@
         },
         {
           "type": "text",
-          "content": "Згенерована кнопка приймає наступні параметри:<ul><li><code>elementType = href ? \"a\" : \"button\"</code></li><li><code>target</code></li><li><code>className</code></li><li><code>id</code></li><li><code>rel</code></li><li><code>ariaLabel</code></li>li><code>title</code></li>li><code>onClick</code></li></ul>"
+          "content": "Згенерована кнопка приймає наступні параметри:<ul><li><code>elementType = href ? \"a\" : \"button\"</code></li><li><code>target</code></li><li><code>className</code></li><li><code>id</code></li><li><code>rel</code></li><li><code>ariaLabel</code></li><li><code>title</code></li><li><code>onClick</code></li></ul>"
         },
         {
           "type": "text",
@@ -473,13 +473,28 @@
       "Додавання":  [
         {
           "type": "text",
-          "content": "Додавання"
+          "content": "<b>Dispatcher</b> дозволяє взаємодіяти із <b>localStorage</b> у реальному часі, що втілює базові концепції реактивності."
+        },
+        {
+          "type": "text",
+          "content": "Для реалізації додавання даних у <b>localStorage</b>, необхідно звернутися до методу <b>set</b>, попередньо імпортувавши хелпер <b>useDispatcher</b> до компоненту:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "import {dispatcher} from \"../../core/helpers/useDispatcher.js\";\n\nexport const AddEntry = {\n    template: `\n    < div class=\"col-xl-12 d-flex flex-column\">\n      < div class=\"d-flex flex-row mb-2\">\n        < input class=\"form-control me-2\" id=\"entry-text\" type=\"text\" placeholder=\"Write something...\" />\n        < button class=\"btn btn-white\" id=\"submit-entry\">Add< /button>\n      < /div>\n    < /div>\n  `,\n    onMount() {\n        const input = document.getElementById(\"entry-text\");\n        const button = document.getElementById(\"submit-entry\");\n\n        const STORAGE_KEY = \"notes\";\n\n        button.addEventListener(\"click\", () => {\n            const value = input.value.trim();\n            if (!value) return;\n            const existing = dispatcher.get(STORAGE_KEY) || [];\n            const newEntry = {\n                id: Date.now(),\n                text: value,\n                timestamp: new Date().toISOString()\n            };\n            dispatcher.set(STORAGE_KEY, [...existing, newEntry]);\n\n            input.value = \"\";\n    },\n}"
         }
       ],
       "Зчитування": [
         {
           "type": "text",
-          "content": "Завантаження"
+          "content": "Зчитування"
+        }
+      ],
+      "Оновлення": [
+        {
+          "type": "text",
+          "content": "Оновлення"
         }
       ],
       "Видалення": [

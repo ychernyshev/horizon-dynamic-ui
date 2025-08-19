@@ -1,6 +1,6 @@
 import { LocalStorage } from "./core/helpers/useLocalStorage.js";
 import { Routing } from "./core/helpers/useRouting.js";
-import { init } from "./router";
+import { init } from "./router/index.js";
 import { SceneManager } from "./core/tce/SceneManager.js";
 import {Dispatcher} from "./core/helpers/useDispatcher.js";
 
