@@ -644,7 +644,32 @@
       "useDispatcher": [
         {
           "type": "text",
-          "content": "useDispatcher"
+          "content": "<b>useDispatcher</b> — це реактивний хелпер, що реалізує <b>локальну систему керування станом</b> на основі <b>localStorage</b>. Він дозволяє <b>зберігати, читати, оновлювати та транслювати дані</b> між компонентами <b>Horizon Dynamic UI</b> без використання зовнішніх бібліотек типу <b>Redux</b> чи <b>Vuex</b>."
+        },
+        {
+          "type": "text",
+          "content": "Це простий, у даній редакції, декларативний механізм, який поєднує збереження даних у браузері із реактивною логікою — тобто, зміна значення автоматично викликає відповідні підписки."
+        },
+        {
+          "type": "text",
+          "content": "Основні методи <b>useDispatcher</b>:"
+        },
+        {
+          "type": "text",
+          "content": "<table class=\"table\">\n  <thead>\n    <tr>\n      <th scope=\"col\">Метод</th>\n      <th scope=\"col\">Опис</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th scope=\"row\"><b>set(key, value)</b></th>\n      <td>Зберігає значення у <b>localStorage</b> та викликає <b>emit()</b></td>\n    </tr>\n    <tr>\n      <th scope=\"row\"><b>get(key)</b></th>\n      <td>Зчитує значення з <b>localStorage</b></td>\n    </tr>\n    <tr>\n      <th scope=\"row\"><b>clear(key)</b></th>\n      <td>Видаляє значення з <b>localStorage</b> та викликає <b>emit()</b></td>\n    </tr>\n    <tr>\n      <th scope=\"row\"><b>subscribe(key, callback)</b></th>\n      <td>Реєструє функцію, яка буде викликана при зміні значення</td>\n    </tr>\n    <tr>\n      <th scope=\"row\"><b>unsubscribe(key, callback)</b></th>\n      <td>Видаляє підписку</td>\n    </tr>\n    <tr>\n      <th scope=\"row\"><b>emit(key, value)</b></th>\n      <td>Викликає всі підписки для ключа з новим значенням</td>\n    </tr>\n    <tr>\n      <th scope=\"row\"><b>hydrate(key)</b></th>\n      <td>Ініціалізує підписки поточним значенням з <b>localStorage</b></td>\n    </tr>\n  </tbody>\n</table>"
+        },
+        {
+          "type": "text",
+          "content": "Приклад використання:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "import { dispatcher } from \"../core/helpers/useDispatcher.js\";\n\ndispatcher.subscribe(\"user\", (data) => {\n  console.log(\"User data changed:\", data);\n});\n\ndispatcher.set(\"user\", { name: \"Євгеній\", role: \"admin\" });\n// → автоматично викликає підписку\n\ndispatcher.clear(\"user\");\n// → підписка отримає null\n"
+        },
+        {
+          "type": "text",
+          "content": "<b>useDispatcher</b> — це локальний реактивний вузол, який дозволяє компонентам Horizon зберігати стан без серверної залежності, реагувати на зміни без ручного оновлення <b>DOM</b>, будувати логіку взаємодії між сценами та компонентами. Цей механізм синхронізації дозволяє створювати та зберігати декларативність і контроль в межах динамічного інтерфейсу, які й покликаний створювати <b>Horizon Dynamic UI</b>."
         }
       ],
       "useMessages": [
@@ -674,7 +699,16 @@
       "useRouting": [
         {
           "type": "text",
-          "content": "useRouting"
+          "content": "Хеш-посилання є найпростішим методом адресування усередині <b>Horizon Dynamic UI</b> між його частинами. Для використання таких посилань, достатньо створити відповідний роут у <code>router -> index.js</code>. Наприклад:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "export function init(app) {\n    app.routing.add(\"page_404\", () => {\n        app.sceneManager.mountScene(\"page_404\");\n    });\n    Інший код...\n}"
+        },
+        {
+          "type": "text",
+          "content": "У шаблоні використати тег <b>a</b>: <code>< a href=\"#page_404\">Page 404< /a></code>"
         }
       ]
     }
