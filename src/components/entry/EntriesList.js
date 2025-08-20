@@ -14,8 +14,7 @@ export const EntriesList = {
 
         this.onMount(config);
     },
-    onMount({
-                entries = [], mode, onEdit = () => {
+    onMount({entries = [], mode, onEdit = () => {
         }, onDelete = () => {
         }
             }) {

@@ -482,13 +482,30 @@
         {
           "type": "code",
           "language": "js",
-          "content": "import {dispatcher} from \"../../core/helpers/useDispatcher.js\";\n\nexport const AddEntry = {\n    template: `\n    < div class=\"col-xl-12 d-flex flex-column\">\n      < div class=\"d-flex flex-row mb-2\">\n        < input class=\"form-control me-2\" id=\"entry-text\" type=\"text\" placeholder=\"Write something...\" />\n        < button class=\"btn btn-white\" id=\"submit-entry\">Add< /button>\n      < /div>\n    < /div>\n  `,\n    onMount() {\n        const input = document.getElementById(\"entry-text\");\n        const button = document.getElementById(\"submit-entry\");\n\n        const STORAGE_KEY = \"notes\";\n\n        button.addEventListener(\"click\", () => {\n            const value = input.value.trim();\n            if (!value) return;\n            const existing = dispatcher.get(STORAGE_KEY) || [];\n            const newEntry = {\n                id: Date.now(),\n                text: value,\n                timestamp: new Date().toISOString()\n            };\n            dispatcher.set(STORAGE_KEY, [...existing, newEntry]);\n\n            input.value = \"\";\n    },\n}"
+          "content": "import {renderTemplate} from \"../../core/helpers/renderTemplate.js\";\nimport {dispatcher} from \"../../core/helpers/useDispatcher.js\";\n\nexport const ShowEntry = {\n    template: `\n        <ul id=\"notes-list\"></ul>\n    `,\n    mount(config = {}) {},\n    onMount() {\n        const list = document.getElementById(\"notes-list\");\n\n        const STORAGE_KEY = \"notes\";\n\n        dispatcher.subscribe(STORAGE_KEY, (entries) => {\n            list.innerHTML = \"\";\n            if (!Array.isArray(entries)) return;\n        });\n\n        dispatcher.hydrate(STORAGE_KEY);\n\n        dispatcher.subscribe(\"notes\", entries => {\n            EntriesList.onMount({\n                entries,\n                mode: \"readonly\",\n            });\n        });\n    },\n}"
+        },
+        {
+          "type": "text",
+          "content": "Шаблон має містити контейнер <code><section id=\"show-entry\"></section></code>, як точку монтування зчитаних даних"
+        },
+        {
+          "type": "text",
+          "content": "Шаблон має містити контейнер <code><section id=\"show-entry\"></section></code>, як точку монтування зчитаних даних"
         }
       ],
       "Зчитування": [
         {
           "type": "text",
-          "content": "Зчитування"
+          "content": "Зчитування даних з <b>localStorage</b> відбуваються шляхом використання методів <code>subscribe</code> та <code>hydrate</code> хелперу <b>useDispatcher</b>."
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "import {renderTemplate} from \"../../core/helpers/renderTemplate.js\";\nimport {dispatcher} from \"../../core/helpers/useDispatcher.js\";\n\nexport const ShowEntry = {\n    template: `\n        < ul id=\"notes-list\">< /ul>\n    `,\n    mount(config = {}) {\n        const container = document.getElementById(\"show-entry\");\n\n        if (!container) {\n            console.warn(\"[ShowEntry] Container #show-entry not found - component not mounted.\");\n            return;\n        }\n\n        container.innerHTML = renderTemplate(this.template, config);\n        this.onMount();\n    },\n    onMount() {\n        const list = document.getElementById(\"notes-list\");\n\n        const STORAGE_KEY = \"notes\";\n\n        dispatcher.subscribe(STORAGE_KEY, (entries) => {\n            list.innerHTML = \"\";\n            if (!Array.isArray(entries)) return;\n        });\n\n        dispatcher.hydrate(STORAGE_KEY);\n\n        dispatcher.subscribe(\"notes\", entries => {\n            EntriesList.onMount({\n                entries,\n                mode: \"readonly\",\n            });\n        });\n    },\n}"
+        },
+        {
+          "type": "text",
+          "content": "Шаблон має містити контейнер <code>< section id=\"show-entry\">< /section></code>, як точку монтування для відображення завантажених даних."
         }
       ],
       "Оновлення": [

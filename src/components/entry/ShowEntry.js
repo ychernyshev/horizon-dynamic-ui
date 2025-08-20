@@ -26,18 +26,11 @@ export const ShowEntry = {
         dispatcher.subscribe(STORAGE_KEY, (entries) => {
             list.innerHTML = "";
             if (!Array.isArray(entries)) return;
-            // entries.forEach((text) => {
-            //     const li = document.createElement("li");
-            //     li.textContent = text;
-            //     list.appendChild(li);
-            // });
         });
 
         dispatcher.hydrate(STORAGE_KEY);
 
         dispatcher.subscribe("notes", entries => {
-            // console.log("[Render] EntriesList — entries:", entries);
-
             EntriesList.onMount({
                 entries,
                 mode: "readonly",
