@@ -647,16 +647,28 @@
           "content": "useDispatcher"
         }
       ],
-      "useHighlight": [
-        {
-          "type": "text",
-          "content": "Блок коду"
-        }
-      ],
       "useMessages": [
         {
           "type": "text",
-          "content": "useMessages"
+          "content": "Хелпер <b>useMessages</b> посилається на агент виводу повідомлень - <b>MessagesAgent</b>. Логіка використання полягає у імпортуванні хелперу до компоненту:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "import {useMessages} from \"../../core/helpers/useMessages.js\";"
+        },
+        {
+          "type": "text",
+          "content": "І з подальшим викликом кнопки із виводом потрібного повідомлення на екран:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "const messages = useMessages(); messages.success(\"saved\");"
+        },
+        {
+          "type": "text",
+          "content": "Доступні такі типи повідомлень:<ul><li>success</li><li>info</li><li>warning</li><li>error</li></ul>"
         }
       ],
       "useRouting": [
