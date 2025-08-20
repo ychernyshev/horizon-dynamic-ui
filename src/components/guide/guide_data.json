@@ -515,7 +515,7 @@
         },
         {
           "type": "text",
-          "content": "Нижче будуть розглянуте редагування запису у <b>localStorage</b> із використанням властивостями: <b>редагування</b> та <b>видалення</b>. Спершу необхідно створити відповідні кнопки з редагування запису:"
+          "content": "Нижче буде розглянуте <b>редагування</b> запису у <b>localStorage</b> . Спершу необхідно створити відповідну кнопку з редагування запису:"
         },
         {
           "type": "code",
@@ -524,7 +524,7 @@
         },
         {
           "type": "text",
-          "content": "Наступним кнопок стане створення компоненту із логікою, що використовує компонент із кнопками керування, для оновлення даних у <b>localStorage</b>:"
+          "content": "Наступним кнопок стане створення компоненту із логікою, що використовує компонент із кнопкою редагування, для оновлення запису у <b>localStorage</b>:"
         },
         {
           "type": "code",
@@ -535,7 +535,25 @@
       "Видалення": [
         {
           "type": "text",
-          "content": ""
+          "content": "Видалення даних з <b>localStorage</b> відбуваються шляхом використання методу <code>subscribe</code> хелперу <b>useDispatcher</b>. "
+        },
+        {
+          "type": "text",
+          "content": "Нижче буде розглянуте <b>видалення</b> запису у <b>localStorage</b> . Спершу необхідно створити відповідну кнопку з видалення запису:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "import {renderTemplate} from \"../../core/helpers/renderTemplate.js\";\n\nexport const EntriesList = {\n    template: ``,\n    mount(config = {}) {\n        const container = document.getElementById(\"entries-list\");\n\n        if (!container) {\n            console.warn(\"[EntriesList] #entries-list not found during mount.\");\n            return;\n        }\n\n        container.innerHTML = renderTemplate(this.template, config);\n\n        this.onMount(config);\n    },\n    onMount({entries = [], mode, onEdit = () => {\n        }, onDelete = () => {\n        }\n            }) {\n        const ul = document.getElementById(\"entries-list\");\n\n        if (!ul) {\n            console.warn(\"[EntriesList] #entries-list not found during onMount.\");\n            return;\n        }\n\n        ul.innerHTML = \"\";\n\n        entries.forEach(entry => {\n            if (!entry || !entry.text) return;\n\n            const li = document.createElement(\"li\");\n            li.textContent = entry.text;\n\n            if (mode === \"editable\") {\n                const delBtn = document.createElement(\"button\");\n                delBtn.textContent = \"\uD83D\uDDD1️\";\n                delBtn.onclick = () => onDelete(entry.id);\n                \n                li.appendChild(delBtn);\n            }\n\n            ul.appendChild(li);\n        });\n    }\n};\n"
+        },
+        {
+          "type": "text",
+          "content": "Наступним кнопок стане створення компоненту із логікою, що використовує компонент із кнопкою видалення обраного запису з <b>localStorage</b>:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "import {renderTemplate} from \"../../core/helpers/renderTemplate.js\";\nimport {dispatcher} from \"../../core/helpers/useDispatcher.js\";\nimport {EntriesList} from \"./EntriesList.js\";\n\nexport const EditEntry = {\n    template: ``,\n    mount(config = {}) {\n        const container = document.getElementById(\"edit-entry\");\n\n        if (!container) {\n            console.warn(\"[EditEntry] Container #edit-entry not found - component not mounted.\");\n            return;\n        }\n\n        container.innerHTML = renderTemplate(this.template, config);\n        this.onMount();\n    },\n    onMount() {\n        const button = document.getElementById(\"submit-entry\");\n        const input = document.getElementById(\"entry-text\");\n        const list = document.getElementById(\"edit-entry\");\n\n        const STORAGE_KEY = \"notes\";\n\n        button.addEventListener(\"click\", () => {\n            const value = input.value.trim();\n            if (!value) return;\n            const existing = dispatcher.get(STORAGE_KEY) || [];\n\n            const newEntry = {\n                id: Date.now(),\n                text: value,\n                timestamp: new Date().toISOString()\n            };\n\n            dispatcher.set(STORAGE_KEY, [...existing, newEntry]);\n            input.value = \"\";\n        });\n\n        dispatcher.subscribe(STORAGE_KEY, (entries) => {\n            list.innerHTML = \"\";\n            if (!Array.isArray(entries)) return;\n\n            entries.forEach((entry) => {\n                const li = document.createElement(\"li\");\n\n                const span = document.createElement(\"span\");\n                span.textContent = entry.text;\n\n                const deleteBtn = document.createElement(\"button\");\n                deleteBtn.textContent = \"\uD83D\uDDD1️\";\n                deleteBtn.addEventListener(\"click\", () => {\n                    const filtered = entries.filter(e => e.id !== entry.id);\n                    dispatcher.set(STORAGE_KEY, filtered);\n                });\n\n                li.appendChild(span);\n                li.appendChild(deleteBtn);\n                list.appendChild(li);\n            });\n        });\n\n        const promptEdit = (id) => {\n            const notes = dispatcher.get(\"notes\") || [];\n            const entry = notes.find(e => e.id === id);\n            const newText = prompt(\"Редагувати запис:\", entry?.text);\n            if (newText !== null && entry) {\n                const updated = notes.map(e => e.id === id ? {...e, text: newText} : e);\n                dispatcher.set(\"notes\", updated);\n            }\n        };\n\n        const deleteEntry = (id) => {\n            const notes = dispatcher.get(\"notes\") || [];\n            const filtered = notes.filter(e => e.id !== id);\n            dispatcher.set(\"notes\", filtered);\n        };\n\n        dispatcher.hydrate(STORAGE_KEY);\n\n        let currentMode = \"readonly\";\n\n        dispatcher.subscribe(\"notes\", entries => {\n            if (currentMode === \"readonly\") {\n                EntriesList.onMount({entries, mode: \"readonly\"});\n            } else if (currentMode === \"editable\") {\n                EntriesList.mount({\n                    entries,\n                    mode: \"editable\",\n                    onEdit: promptEdit,\n                    onDelete: deleteEntry\n                });\n            }\n        });\n\n    }\n}"
         }
       ]
     },
