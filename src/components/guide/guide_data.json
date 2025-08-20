@@ -561,7 +561,33 @@
       "renderTemplate": [
         {
           "type": "text",
-          "content": "renderTemplate"
+          "content": "<b>renderTemplate</b> є допоміжним компонентом, що у межах DUI, належить до категорії <b>helpers</b>. Даний хелпер дозволяє налаштовувати вивід даних на екран у <b>декларативному</b> стилі. Декларативний стиль, передбачає використання логіки у сцені чи то компоненті до неї. Це надає гнучкості у керуванні потоком даних у шаблоні, у котрому створюється блок коду <code>template = ``</code>, де дані додаються та змінюються ще до його монтування у контейнер за допомогою <b>innerHTML</b>. Уникнення безпосередньої ініціалізації контенту через <code>container.innerHTML = `...сode...`;</code> значно полегшує цю процедуру."
+        },
+        {
+          "type": "text",
+          "content": "Шаблон у <b>декларативному</b> стилі має наступний вигляд:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "import {renderTemplate} from \"../core/helpers/renderTemplate.js\";\n\nexport const WelcomeScene = {\n    template: `\n        ...Code...\n    `,\n    mount(config = {}) {\n        const container = document.getElementById(\"welcome-block\");\n\n        if (!container) {\n            console.warn(\"[WelcomeScene] Container #welcome-block not found - component not mounted.\");\n            return;\n        }\n\n        container.innerHTML = renderTemplate(this.template, config);\n\n        if (typeof this.onMount === \"function\") {\n            this.onMount();\n        }\n    },\n    onMount() {}\n}"
+        },
+        {
+          "type": "text",
+          "content": "Попередньо імпортований <b>renderTemplate</b> приймає рядок з кодом та за допомогою <code>replace()</code> проходить по всіх входженнях у ньому - <code>{...}</code>, і замінює їх на відповідні значення з <code>config</code>. <code>config</code> приходить у компонент, в якості параметрі <code>mount(config = {}) {}</code> з <b>RegistryLayoutScheme.js</b>, якщо відповідні дані там були зазначені, а також, якщо ці дані буди попередньо створені у межах <code>mount(config = {}) {}</code> та <code>onMount() {}</code>. На прикладі це виглядає наступним чином:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "import {renderTemplate} from \"../core/helpers/renderTemplate.js\";\n\nexport const WelcomeScene = {\n    template: `< div class=\"container-fluid d-flex align-items-center\" style=\"height: 95vh\">\n                    < div class=\"row justify-content-center\">\n                        < div class=\"col-xxl-4 col-xl-6 col-lg-10 text-center mt-5 mb-4\">\n                            < p class=\"col-xl-5 display-6\">Welcome</p>\n                            < div>\n                                < p class=\"text-gradient text-info mb-3 display-4\">{title}< /p>\n                                < p class=\"col-xl-10 lead mx-auto text-end\">Let`s go improvise on your stage< /p>\n                            < /div>\n                        < /div>\n                        < div class=\"row justify-content-center\">\n                            < div class=\"card col-xxl-4 col-xl-6 bg-soft-ui p-2 text-center\">\n                                < h5>It is a JavaScript framework to develop static templates and websites for static hosting like GitHub or Netlify, with dynamic functionality, without Node.js< /h5>\n                            < /div>\n                        < /div>\n                        < div class=\"row justify-content-center mt-5 mb-4\">\n                            < div class=\"col-xl-6 text-center\">\n                                < p>\n                                    < span class=\"lead\">The philosophy: </span>\n                                    < span class=\"text-secondary\">{subtitle}.< /span>\n                                < /p>\n                                < p class=\"lead\">{tagline}< /p>\n        \n                                {CTA_button}\n                            < /div>\n                        < /div>\n                    < /div>\n                < /div>`,\n    mount(config = {}) {\n        const container = document.getElementById(\"welcome-block\");\n\n        if (!container) {\n            console.warn(\"[WelcomeScene] Container #welcome-block not found - component not mounted.\");\n            return;\n        }\n\n        const {title, subtitle, version, tagline, CTA} = config;\n\n        const CTA_label = config.CTA?.label || \"Explore\";\n        const CTA_link = config.CTA?.link?.trim() ? config.CTA.link : \"#page404\";\n\n        const processedConfig = {\n            ...config,\n            CTA_button: `< a href=\"${CTA_link}\" class=\"btn bg-gradient-info mt-3 fs-6\">\n                 ${CTA_label}\n                 < span class=\"badge\">${config.version}< /span>\n               < /a>`\n        };\n\n\n        container.innerHTML = renderTemplate(this.template, processedConfig);\n\n        if (typeof this.onMount === \"function\") {\n            this.onMount();\n        }\n    },\n\n    onMount() {...}\n}"
+        },
+        {
+          "type": "text",
+          "content": "<code>mount(config = {}) {}</code> отримав частину даних з <b>RegistryLayoutScheme.js</b> та ще частину згенерував, з'єднавши отримані дані із новими у <code>processedConfig</code>, що й було передано для обробки через <b>renderTemplate.js</b> та монтування у контейнер <code>welcome-block</code>."
+        },
+        {
+          "type": "text",
+          "content": "Подібні маніпуляції із кодом вимагають наявність ідеї <b>renderTemplate.js</b> у <b>DUI</b> та <b>декларативного</b> стилю програмування. Логіка має бути відокремлена від представлення, а шаблон — гнучким, безпечним і легко масштабованим. <b>Імперативний</b> стиль не надає подібної гнучкості. Шаблон прийдеться перемальовувати щоразу, коли відбуваються зміни. Негативний вплив <b>Імперативного</b> стилю програмування у реалізації динамічного коду, можна структурувати наступним чином:<ul><li>Дані вже \"зашиті\" в шаблон — їх не можна змінити без повного перегенерування рядка.</li><li>Немає можливості централізовано керувати логікою підстановки (наприклад, fallback-значення (значення за замовченням, якщо не \"прийшли\" інші), умовні блоки, динамічні компоненти)</li><li>Використовувати плейсхолдери {key} — доводиться вручну конкатенувати рядки.</li><li>Розділити шаблон і логіку — все змішується в одному великому рядку.</li><li>Якщо ти вставляєш дані напряму в innerHTML, без обробки, то дані можуть містити шкідливий код (наприклад, <code>script</code>)</li></ul>"
         }
       ],
       "useAssets": [
