@@ -593,7 +593,16 @@
       "useAssets": [
         {
           "type": "text",
-          "content": "renderTemplate"
+          "content": "Хелпер <b>useAssets</b> дозволяє використовувати у сценах ізольованих (<code>scoped</code>) стилів та скриптів. Це дозволяє додавати кожній окремій сцені свої унікальні <b>CSS</b>-стилі та <b>JS</b>-скрипти, які будуть доступні лише у межах конкретної сцени. Додатковий імпорт даного хелперу не потрібний. Усі налаштування проводяться з <b>RegistryLayoutScheme.js</b> у відповідних блоках коду <code>linkHref</code> та <code>scriptSrc</code>:"
+        },
+        {
+          "type": "code",
+          "language": "js",
+          "content": "guide: {\n        primary_structure: ``,\n        layout: [],\n        config: {},\n        linkHref: [\"https://unpkg.com/prismjs/themes/prism.css\"],\n        scriptSrc: [\"https://unpkg.com/prismjs/prism.js\", \"https://unpkg.com/prismjs/components/prism-javascript.min.js\"],\n    },"
+        },
+        {
+          "type": "text",
+          "content": "Додавати значення обох масивів можливо списком, якщо файлів стилів чи скриптів є декілька."
         }
       ],
       "useCTA": [
